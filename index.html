@@ -142,17 +142,22 @@
   .measure-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
   .m-card{
     background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:34px;display:flex;gap:26px;align-items:center;transition:.3s;
+    padding:30px;display:flex;flex-direction:column;align-items:center;text-align:center;
+    gap:20px;transition:.3s;
   }
   .m-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-soft);border-color:transparent}
   .m-card .num{
-    flex-shrink:0;width:44px;height:44px;border-radius:12px;background:var(--blue);
-    color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:19px;
+    width:42px;height:42px;border-radius:12px;background:var(--blue);
+    color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:18px;
     display:grid;place-items:center;
   }
-  .m-card img{width:128px;border-radius:14px;background:var(--blue-tint);padding:8px}
-  .m-card h3{font-size:21px;color:var(--navy);margin-bottom:8px}
-  .m-card p{color:var(--muted);font-size:15px}
+  .m-card .fig{
+    width:100%;background:var(--blue-tint);border-radius:16px;padding:22px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .m-card .fig img{width:100%;max-width:360px;height:auto;display:block}
+  .m-card h3{font-size:23px;color:var(--navy);margin-bottom:8px}
+  .m-card p{color:var(--muted);font-size:15.5px;max-width:420px}
   @media(max-width:760px){.measure-grid{grid-template-columns:1fr}.m-card{flex-direction:column;text-align:center}}
 
   /* FINDER */
@@ -285,7 +290,7 @@
     <div>
       <span class="eyebrow">Smart Sizing Tool</span>
       <h1>Find Your <em>Perfect Fit</em> with Syrebo</h1>
-      <p>Our smart sizing tool helps you quickly select the most suitable size for a comfortable and effective rehabilitation experience. Enter a few measurements and get personalized recommendations in seconds.</p>
+      <p>Enter your hand measurements and get the right Syrebo rehabilitation glove size in seconds — a precise, comfortable fit for every hand, from children to adults.</p>
       <div class="hero-cta">
         <a href="#finder" class="btn btn-primary">Start Sizing
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -321,7 +326,7 @@
     <div class="measure-grid">
       <div class="m-card reveal">
         <div class="num">1</div>
-        <img src="assets/hand-length.png" alt="Hand length measurement" />
+        <div class="fig"><img src="assets/hand-length.png" alt="Hand length measurement" /></div>
         <div>
           <h3>Hand Length</h3>
           <p>Measure vertically from the tip of the middle finger straight down to the wrist crease.</p>
@@ -329,7 +334,7 @@
       </div>
       <div class="m-card reveal">
         <div class="num">2</div>
-        <img src="assets/hand-width.png" alt="Hand width measurement" />
+        <div class="fig"><img src="assets/hand-width.png" alt="Hand width measurement" /></div>
         <div>
           <h3>Hand Width</h3>
           <p>Measure across the widest part of the palm, at the knuckles of the metacarpal joints.</p>
@@ -352,15 +357,6 @@
         <h3>Your details</h3>
         <p class="sub">Enter your hand length for the most accurate result — or just your height and weight for a quick estimate.</p>
 
-        <div class="field">
-          <label>Age group</label>
-          <div class="seg" id="segGroup">
-            <button data-g="Adult" class="on">Adult</button>
-            <button data-g="Kid">Kid</button>
-            <button data-g="Toddler">Toddler</button>
-          </div>
-        </div>
-
         <div class="field" id="fLen">
           <label for="len">Hand length (mm) <em class="hint">recommended</em></label>
           <input id="len" type="number" min="0" placeholder="e.g. 185" />
@@ -372,15 +368,15 @@
           <input id="wid" type="number" min="0" placeholder="e.g. 92" />
         </div>
 
-        <div class="orline"><span>or estimate from</span></div>
+        <div class="orline"><span>optional — estimate from</span></div>
 
         <div class="row2">
           <div class="field">
-            <label for="height">Height (cm)</label>
+            <label for="height">Height (cm) <em class="hint">optional</em></label>
             <input id="height" type="number" min="0" placeholder="e.g. 170" />
           </div>
           <div class="field">
-            <label for="weight">Weight (kg)</label>
+            <label for="weight">Weight (kg) <em class="hint">optional</em></label>
             <input id="weight" type="number" min="0" placeholder="e.g. 65" />
           </div>
         </div>
@@ -521,35 +517,21 @@
 </footer>
 
 <script>
-  const SIZES = {
-    Adult:[
-      {s:"XL",l:[195,210],w:[100,115]},
-      {s:"L", l:[180,198],w:[90,105]},
-      {s:"M", l:[160,185],w:[80,95]},
-      {s:"S", l:[145,165],w:[70,80]}
-    ],
-    Kid:[
-      {s:"12",l:[138,153],w:[65,72]},
-      {s:"9", l:[126,145],w:[60,67]},
-      {s:"7", l:[119,135],w:[55,62]},
-      {s:"5", l:[108,126],w:[50,57]}
-    ],
-    Toddler:[
-      {s:"3",  l:[100,115],w:[48,55]},
-      {s:"1.5",l:[85,95],  w:[40,48]}
-    ]
-  };
-
-  let group="Adult";
-  // approximate hand-length (mm) ≈ height(cm) × factor, per age group
-  const HFACTOR={Adult:1.08,Kid:1.10,Toddler:1.05};
-
-  document.querySelectorAll("#segGroup button").forEach(b=>{
-    b.addEventListener("click",()=>{
-      document.querySelectorAll("#segGroup button").forEach(x=>x.classList.remove("on"));
-      b.classList.add("on");group=b.dataset.g;
-    });
-  });
+  // full size range, kids through adults — matched automatically
+  const SIZES = [
+    {s:"XL", cat:"Adult",   l:[195,210], w:[100,115]},
+    {s:"L",  cat:"Adult",   l:[180,198], w:[90,105]},
+    {s:"M",  cat:"Adult",   l:[160,185], w:[80,95]},
+    {s:"S",  cat:"Adult",   l:[145,165], w:[70,80]},
+    {s:"12", cat:"Kid",     l:[138,153], w:[65,72]},
+    {s:"9",  cat:"Kid",     l:[126,145], w:[60,67]},
+    {s:"7",  cat:"Kid",     l:[119,135], w:[55,62]},
+    {s:"5",  cat:"Kid",     l:[108,126], w:[50,57]},
+    {s:"3",  cat:"Toddler", l:[100,115], w:[48,55]},
+    {s:"1.5",cat:"Toddler", l:[85,95],   w:[40,48]}
+  ];
+  // rough hand-length(mm) ≈ height(cm) × factor (estimate only)
+  const HFACTOR=1.08;
 
   function gap(v,[a,b]){ return v<a ? a-v : v>b ? v-b : 0; }
   function centerDist(v,[a,b]){ return Math.abs(v-(a+b)/2)/((b-a)/2||1); }
@@ -569,12 +551,11 @@
     fLen.classList.remove("err");
 
     const estimated=!hasLen;
-    const L=hasLen ? len : Math.round(ht*HFACTOR[group]);
+    const L=hasLen ? len : Math.round(ht*HFACTOR);
     const useW=wid>0;
 
-    const list=SIZES[group];
     let best=null,bestScore=Infinity,exact=false;
-    list.forEach(o=>{
+    SIZES.forEach(o=>{
       const g=gap(L,o.l)+(useW?gap(wid,o.w):0);
       const tie=centerDist(L,o.l)+(useW?centerDist(wid,o.w):0);
       const score=g*1000+tie;
@@ -584,15 +565,15 @@
     document.getElementById("resEmpty").style.display="none";
     document.getElementById("resCard").style.display="block";
     document.getElementById("resSize").textContent=best.s;
-    document.getElementById("resCat").textContent=group+(estimated?" · estimated from height":" · measured hand");
+    document.getElementById("resCat").textContent=best.cat+(estimated?" · estimated from height":" · measured hand");
     document.getElementById("rLen").textContent=L+" mm"+(estimated?" (est.)":"");
     document.getElementById("rWid").textContent=useW?wid+" mm":"—";
     document.getElementById("rConf").textContent=estimated?"Estimate":(exact?"Excellent":"Closest match");
     document.getElementById("rNote").textContent=estimated
       ? "Estimated from your height. For the most accurate fit, measure your hand length and check again."
       : (exact
-          ? "Your measurements fall comfortably within the "+group+" "+best.s+" range."
-          : "No size fully covered your measurements, so we matched you to the closest "+group+" size.");
+          ? "Your measurements fall comfortably within the "+best.cat+" "+best.s+" range."
+          : "No size fully covered your measurements, so we matched you to the closest size.");
 
     document.getElementById("resCard").scrollIntoView({behavior:"smooth",block:"nearest"});
   }
