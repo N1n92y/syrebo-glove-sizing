@@ -79,19 +79,6 @@ header.scrolled{box-shadow:0 8px 32px -16px rgba(10,37,64,.18)}
 .flow-divider-text{font-family:"Sora",sans-serif;font-weight:700;font-size:20px;color:var(--navy)}
 .flow-divider-line{flex:1;height:1px;background:var(--line)}
 
-/* MEASURE GRID */
-.measure-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.m-card{
-  background:var(--blue-tint-2);border:1px solid var(--line);border-radius:22px;
-  padding:28px 24px;display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:16px;transition:.3s;
-}
-.m-card:hover{border-color:rgba(20,82,230,.22);box-shadow:0 14px 44px -18px rgba(20,82,230,.16);transform:translateY(-3px)}
-.m-fig{width:100%;background:#fff;border-radius:14px;padding:18px;display:flex;align-items:center;justify-content:center}
-.m-fig img{width:100%;max-width:240px;height:auto}
-.m-card h3{font-size:18px;color:var(--navy);margin-bottom:4px}
-.m-card p{color:var(--muted);font-size:13.5px;line-height:1.6}
-@media(max-width:580px){.measure-grid{grid-template-columns:1fr}}
 
 /* INPUT SECTION */
 .input-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
@@ -110,15 +97,22 @@ header.scrolled{box-shadow:0 8px 32px -16px rgba(10,37,64,.18)}
 .orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--line)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .calc-row{margin-top:8px}
-.input-hint{
-  background:linear-gradient(140deg,var(--navy) 0%,var(--blue-deep) 100%);
-  border-radius:22px;padding:36px 30px;color:#fff;
-  display:flex;flex-direction:column;justify-content:center;gap:20px;height:100%;
+
+/* MEASURE SIDE (right col of input layout) */
+.measure-side{display:flex;flex-direction:column;gap:16px}
+.measure-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mm-card{
+  background:var(--blue-tint-2);border:1px solid var(--line);border-radius:18px;
+  padding:16px 14px;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:10px;
 }
-.input-hint h4{font-size:17px;font-weight:700;margin-bottom:4px}
-.input-hint p{font-size:13.5px;color:#CDDCF6;line-height:1.65}
-.input-hint .tip{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#9FBCF0;line-height:1.55}
-.input-hint .tip svg{flex-shrink:0;margin-top:2px}
+.mm-fig{width:100%;background:#fff;border-radius:12px;padding:10px;display:flex;align-items:center;justify-content:center}
+.mm-fig img{width:100%;max-width:180px;height:auto}
+.mm-card h4{font-family:"Sora",sans-serif;font-size:13px;font-weight:700;color:var(--navy)}
+.mm-card p{color:var(--muted);font-size:11.5px;line-height:1.5}
+.measure-tip{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--muted);line-height:1.55;padding:12px 14px;background:var(--blue-tint-2);border:1px solid var(--line);border-radius:12px}
+.measure-tip svg{flex-shrink:0;color:var(--blue);margin-top:1px}
+@media(max-width:580px){.measure-mini-grid{grid-template-columns:1fr 1fr}}
 
 /* RESULT */
 .result-wrap{
@@ -204,34 +198,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(
     <h2 class="section-heading">Get the right fit in minutes</h2>
     <p class="section-sub">Measure your hand, enter the values below, and we'll recommend your exact Syrebo size.</p>
 
-    <!-- HOW TO MEASURE -->
+    <!-- MEASURE + INPUT COMBINED -->
     <div class="flow-divider">
       <div class="flow-divider-num">1</div>
-      <div class="flow-divider-text">How to Measure</div>
-      <div class="flow-divider-line"></div>
-    </div>
-
-    <div class="measure-grid">
-      <div class="m-card">
-        <div class="m-fig"><img src="assets/hand-length.png" alt="Hand length"/></div>
-        <div>
-          <h3>Hand Length</h3>
-          <p>Measure vertically from the tip of the middle finger straight down to the wrist crease.</p>
-        </div>
-      </div>
-      <div class="m-card">
-        <div class="m-fig"><img src="assets/hand-width.png" alt="Hand width"/></div>
-        <div>
-          <h3>Hand Width</h3>
-          <p>Measure across the widest part of the palm at the metacarpal knuckles.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ENTER MEASUREMENTS -->
-    <div class="flow-divider">
-      <div class="flow-divider-num">2</div>
-      <div class="flow-divider-text">Enter Your Measurements</div>
+      <div class="flow-divider-text">Measure Your Hand &amp; Enter Values</div>
       <div class="flow-divider-line"></div>
     </div>
 
@@ -264,18 +234,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(
           </button>
         </div>
       </div>
-      <div class="input-hint">
-        <div>
-          <h4>Measuring tips</h4>
-          <p>Measure the hand that will wear the glove, kept flat and relaxed on a table. Use a ruler or soft tape measure.</p>
+      <!-- RIGHT: measure guide -->
+      <div class="measure-side">
+        <div class="measure-mini-grid">
+          <div class="mm-card">
+            <div class="mm-fig"><img src="assets/hand-length.png" alt="Hand length"/></div>
+            <h4>Hand Length</h4>
+            <p>Tip of middle finger to wrist crease</p>
+          </div>
+          <div class="mm-card">
+            <div class="mm-fig"><img src="assets/hand-width.png" alt="Hand width"/></div>
+            <h4>Hand Width</h4>
+            <p>Widest part of palm at knuckles</p>
+          </div>
         </div>
-        <div class="tip">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#9FBCF0" stroke-width="1.6"/><path d="M12 8h.01M11 12h1v4h1" stroke="#9FBCF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          If you only have height, we'll estimate your hand length — but direct measurement gives the most accurate result.
-        </div>
-        <div class="tip">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#9FBCF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          If between two sizes, choose the larger one for a more comfortable fit.
+        <div class="measure-tip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8h.01M11 12h1v4h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Keep hand flat and relaxed. If between sizes, choose the larger one.
         </div>
       </div>
     </div>
