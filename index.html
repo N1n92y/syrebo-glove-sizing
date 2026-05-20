@@ -42,9 +42,11 @@
   /* NAV */
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
   header.scrolled{box-shadow:0 10px 30px -20px rgba(10,37,64,.28)}
-  .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;padding:12px 24px}
+  .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
   .logo{display:inline-block;line-height:0}
   .logo img{height:38px;width:auto;display:block}
+  .nav-badges img{height:52px;width:auto;display:block;opacity:.9}
+  @media(max-width:700px){.nav-badges{display:none}}
 
   /* HERO */
   .hero{position:relative;overflow:hidden;padding:clamp(56px,7vw,96px) 24px}
@@ -154,6 +156,7 @@
 <header>
   <nav class="nav">
     <a href="/" class="logo" aria-label="Syrebo home"><img src="assets/logo.png" alt="Syrebo" /></a>
+    <div class="nav-badges"><img src="assets/trust-badges.png" alt="80+ countries · 4000+ medical units · 60000+ families" /></div>
   </nav>
 </header>
 
