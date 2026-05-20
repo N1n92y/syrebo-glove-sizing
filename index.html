@@ -65,11 +65,11 @@
   .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
   .logo{font-family:"Sora",sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:var(--navy)}
   .logo span{color:var(--blue)}
-  .nav-links{display:flex;gap:34px;font-weight:600;font-size:15px}
-  .nav-links a{color:var(--muted);transition:.2s}
-  .nav-links a:hover{color:var(--blue)}
-  .nav .btn{padding:11px 22px}
-  @media(max-width:860px){.nav-links{display:none}.nav .btn{display:none}}
+  .tagline{
+    font-family:"Manrope",sans-serif;color:var(--muted);font-size:14px;font-weight:500;
+    max-width:540px;text-align:right;line-height:1.45;
+  }
+  @media(max-width:760px){.tagline{display:none}}
 
   /* HERO */
   .hero{position:relative;overflow:hidden;padding-top:clamp(56px,7vw,96px)}
@@ -102,7 +102,7 @@
   }
   @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
   .glove-stage{
-    position:relative;width:min(440px,88%);aspect-ratio:.74;
+    position:relative;width:min(440px,88%);aspect-ratio:.81;
     border-radius:30px;padding:14px;
     background:linear-gradient(170deg,#ffffff,#EAF1FE 75%);
     border:1px solid rgba(255,255,255,.9);
@@ -245,12 +245,10 @@
   .cta-box p{position:relative;color:#D5E2FA;max-width:520px;margin:0 auto 32px;font-size:17px}
   .cta-box .btn{position:relative;background:#fff;color:var(--blue)}
   .cta-box .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px -16px rgba(0,0,0,.4)}
-  footer{padding:60px 24px 44px;border-top:1px solid var(--line);margin-top:clamp(64px,9vw,120px)}
-  .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+  footer{padding:42px 24px;border-top:1px solid var(--line);margin-top:clamp(48px,7vw,90px)}
+  .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
   .foot .logo{font-size:21px}
-  .foot p{color:var(--muted);font-size:14px}
-  .foot .fl{display:flex;gap:26px;font-size:14px;color:var(--muted);font-weight:600}
-  .foot .fl a:hover{color:var(--blue)}
+  .foot p{color:var(--muted);font-size:13.5px}
 
   .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
@@ -274,13 +272,7 @@
 <header>
   <nav class="nav">
     <div class="logo">SY<span>REBO</span></div>
-    <div class="nav-links">
-      <a href="#measure">How to Measure</a>
-      <a href="#finder">Size Finder</a>
-      <a href="#charts">Size Charts</a>
-      <a href="#dimensions">Glove Size</a>
-    </div>
-    <a href="#finder" class="btn btn-primary">Find My Size</a>
+    <div class="tagline">Providing innovative rehabilitation products &amp; services for hospitals, communities and homes.</div>
   </nav>
 </header>
 
@@ -307,10 +299,8 @@
       <div class="halo"></div>
       <div class="ring"></div>
       <div class="glove-stage">
-        <img src="assets/hero-adult-kid.jpg" alt="An adult and a child both wearing the Syrebo hand rehabilitation glove" />
+        <img src="assets/hero-range.jpg" alt="Syrebo rehabilitation glove shown in sizes from adult XL down to toddler" />
       </div>
-      <div class="float-tag t1"><i></i> Clinically informed sizing</div>
-      <div class="float-tag t2"><i></i> Adult · Kid · Toddler</div>
     </div>
   </div>
 </section>
@@ -358,7 +348,7 @@
         <p class="sub">Enter your hand length for the most accurate result — or just your height and weight for a quick estimate.</p>
 
         <div class="field" id="fLen">
-          <label for="len">Hand length (mm) <em class="hint">recommended</em></label>
+          <label for="len">Hand length (mm) <em class="hint">Required</em></label>
           <input id="len" type="number" min="0" placeholder="e.g. 185" />
           <div class="msg">Enter your hand length, or fill in height &amp; weight below.</div>
         </div>
@@ -491,28 +481,10 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta">
-  <div class="cta-box reveal">
-    <h2>Not sure about your size?</h2>
-    <p>Use the smart sizing tool above, or reach out to our specialists for a personalized recommendation.</p>
-    <a href="#finder" class="btn">Find my size now</a>
-  </div>
-</section>
-
 <footer>
   <div class="foot">
-    <div>
-      <div class="logo">SY<span>REBO</span></div>
-      <p>Smart rehabilitation, comfortable fit.</p>
-    </div>
-    <div class="fl">
-      <a href="#measure">Measure</a>
-      <a href="#finder">Size Finder</a>
-      <a href="#charts">Charts</a>
-      <a href="#dimensions">Glove Size</a>
-    </div>
-    <p>© 2026 Syrebo. For sizing guidance only.</p>
+    <div class="logo">SY<span>REBO</span></div>
+    <p>© 2026 Syrebo</p>
   </div>
 </footer>
 
