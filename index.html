@@ -26,253 +26,126 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{
-    font-family:"Manrope",system-ui,sans-serif;
-    color:var(--ink);
-    background:var(--white);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
+  body{font-family:"Manrope",system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   h1,h2,h3,.display{font-family:"Sora",sans-serif;letter-spacing:-.02em;line-height:1.08}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
-  section{padding:clamp(64px,9vw,128px) 24px}
   .wrap{max-width:var(--maxw);margin:0 auto}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:"Sora",sans-serif;font-weight:600;font-size:12px;
-    letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
-    background:var(--blue-tint);padding:8px 16px;border-radius:999px;
-  }
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:"Sora",sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);background:var(--blue-tint);padding:8px 16px;border-radius:999px}
   .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blue)}
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;cursor:pointer;
-    font-family:"Sora",sans-serif;font-weight:600;font-size:15px;
-    padding:15px 28px;border-radius:999px;border:0;transition:.25s;
-  }
-  .btn-primary{background:var(--blue);color:#fff;box-shadow:var(--shadow)}
-  .btn-primary:hover{background:var(--blue-deep);transform:translateY(-2px)}
+  .btn{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-family:"Sora",sans-serif;font-weight:600;font-size:15px;padding:15px 28px;border-radius:999px;border:0;transition:.25s}
+  .btn-primary{background:linear-gradient(180deg,#1A5BEA,#1148CE);color:#fff;box-shadow:0 12px 26px -12px rgba(20,82,230,.55),0 1px 0 rgba(255,255,255,.25) inset}
+  .btn-primary:hover{background:linear-gradient(180deg,#1550DA,#0E3FBE);transform:translateY(-2px)}
   .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
   .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
 
   /* NAV */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+  header.scrolled{box-shadow:0 10px 30px -20px rgba(10,37,64,.28)}
+  .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;padding:12px 24px}
   .logo{display:inline-block;line-height:0}
   .logo img{height:38px;width:auto;display:block}
-  .foot .logo img{height:32px}
-  .tagline{
-    font-family:"Manrope",sans-serif;color:var(--muted);font-size:14px;font-weight:500;
-    max-width:540px;text-align:right;line-height:1.45;
-  }
-  @media(max-width:760px){.tagline{display:none}}
 
   /* HERO */
-  .hero{position:relative;overflow:hidden;padding-top:clamp(56px,7vw,96px)}
-  .hero::before{
-    content:"";position:absolute;inset:0;z-index:-1;
-    background:
-      radial-gradient(900px 540px at 88% 18%,rgba(20,82,230,.14),transparent 60%),
-      radial-gradient(640px 440px at 6% 92%,rgba(20,82,230,.08),transparent 60%),
-      linear-gradient(180deg,var(--blue-tint-2),#fff 70%);
-  }
+  .hero{position:relative;overflow:hidden;padding:clamp(56px,7vw,96px) 24px}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(900px 540px at 88% 18%,rgba(20,82,230,.14),transparent 60%),radial-gradient(640px 440px at 6% 92%,rgba(20,82,230,.08),transparent 60%),linear-gradient(180deg,var(--blue-tint-2),#fff 70%)}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
   .hero h1{font-size:clamp(38px,5.6vw,68px);font-weight:800;color:var(--navy);margin:22px 0 20px}
   .hero h1 em{font-style:normal;color:var(--blue);position:relative}
   .hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:10px;background:rgba(20,82,230,.16);z-index:-1;border-radius:4px}
   .hero p{font-size:clamp(16px,1.5vw,19px);color:var(--muted);max-width:520px;margin-bottom:34px}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-  .hero-stats{display:flex;gap:38px;margin-top:46px;padding-top:30px;border-top:1px solid var(--line)}
-  .hero-stats div b{font-family:"Sora",sans-serif;font-size:30px;color:var(--navy);display:block;line-height:1}
-  .hero-stats div span{font-size:13.5px;color:var(--muted)}
   .hero-visual{position:relative;display:flex;justify-content:center}
-  .hero-visual .halo{
-    position:absolute;width:108%;aspect-ratio:1;border-radius:50%;top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(20,82,230,.16),transparent 62%);
-  }
-  .hero-visual .ring{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:86%;aspect-ratio:1;border:1.5px dashed rgba(20,82,230,.32);border-radius:50%;
-    animation:spin 36s linear infinite;
-  }
+  .hero-visual .halo{position:absolute;width:108%;aspect-ratio:1;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(20,82,230,.16),transparent 62%)}
+  .hero-visual .ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:86%;aspect-ratio:1;border:1.5px dashed rgba(20,82,230,.32);border-radius:50%;animation:spin 36s linear infinite}
   @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-  .glove-stage{
-    position:relative;width:min(420px,82%);
-    animation:float 6s ease-in-out infinite;
-    filter:drop-shadow(0 36px 50px rgba(11,59,176,.28));
-  }
-  .hero-visual img{position:relative;z-index:1;width:100%;height:auto;display:block}
+  .glove-stage{position:relative;width:min(420px,82%);animation:float 6s ease-in-out infinite;filter:drop-shadow(0 36px 50px rgba(11,59,176,.28))}
+  .glove-stage img{position:relative;z-index:1;width:100%;height:auto;display:block}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  .float-tag{
-    position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;
-    padding:12px 16px;box-shadow:var(--shadow-soft);font-size:13px;font-weight:600;
-    display:flex;align-items:center;gap:9px;
-  }
-  .float-tag i{width:9px;height:9px;border-radius:50%;background:#1FB877;display:block}
-  .float-tag.t1{top:-4%;left:-7%;animation:float 5s ease-in-out infinite}
-  .float-tag.t2{bottom:-4%;right:-7%;animation:float 7s ease-in-out infinite}
-  @media(max-width:860px){
-    .hero-grid{grid-template-columns:1fr;text-align:center}
-    .hero p{margin-left:auto;margin-right:auto}
-    .hero-cta,.hero-stats{justify-content:center}
-    .hero-visual{order:-1;margin-bottom:8px}
-  }
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero p{margin-left:auto;margin-right:auto}.hero-cta{justify-content:center}.hero-visual{order:-1;margin-bottom:8px}}
 
-  /* STEP INDICATOR */
-  .step-label{
-    display:flex;align-items:center;gap:14px;margin-bottom:28px;
-  }
-  .step-num{
-    width:44px;height:44px;border-radius:50%;
-    background:var(--blue);color:#fff;
-    font-family:"Sora",sans-serif;font-weight:700;font-size:18px;
-    display:grid;place-items:center;flex-shrink:0;
-    box-shadow:0 6px 18px -6px rgba(20,82,230,.5);
-  }
-  .step-label h2{
-    font-size:clamp(24px,3.2vw,36px);font-weight:700;color:var(--navy);margin:0;
-  }
+  /* WIZARD */
+  #wizard{padding:clamp(48px,7vw,96px) 24px}
+  .wiz-card{max-width:860px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden}
 
-  /* SECTION HEAD (hero/standalone) */
-  .sec-head{max-width:680px;margin:0 auto 60px;text-align:center}
-  .sec-head h2{font-size:clamp(30px,4vw,46px);font-weight:700;color:var(--navy);margin:18px 0 14px}
-  .sec-head p{color:var(--muted);font-size:17px}
+  /* Progress header */
+  .wiz-header{background:var(--navy);padding:28px 40px;display:flex;align-items:center;gap:0}
+  .wiz-pill{display:flex;align-items:center;gap:10px;flex:1}
+  .wiz-pill-num{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);color:rgba(255,255,255,.55);font-family:"Sora",sans-serif;font-weight:700;font-size:14px;display:grid;place-items:center;flex-shrink:0;transition:.3s}
+  .wiz-pill-lbl{font-family:"Sora",sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.45);transition:.3s;white-space:nowrap}
+  .wiz-pill.active .wiz-pill-num{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(20,82,230,.5)}
+  .wiz-pill.active .wiz-pill-lbl{color:#fff}
+  .wiz-pill.done .wiz-pill-num{background:rgba(255,255,255,.25);color:#fff}
+  .wiz-pill.done .wiz-pill-lbl{color:rgba(255,255,255,.65)}
+  .wiz-connector{flex:1;height:1px;background:rgba(255,255,255,.15);max-width:60px}
+  @media(max-width:600px){.wiz-pill-lbl{display:none}.wiz-connector{max-width:24px}}
 
-  /* MEASURE */
-  #measure{background:var(--blue-tint-2)}
-  .measure-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-  .m-card{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:30px;display:flex;flex-direction:column;align-items:center;text-align:center;
-    gap:20px;transition:.3s;
-  }
-  .m-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-soft);border-color:transparent}
-  .m-card .num{
-    width:42px;height:42px;border-radius:12px;background:var(--blue);
-    color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:18px;
-    display:grid;place-items:center;
-  }
-  .m-card .fig{
-    width:100%;background:var(--blue-tint);border-radius:16px;padding:22px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .m-card .fig img{width:100%;max-width:360px;height:auto;display:block}
-  .m-card h3{font-size:23px;color:var(--navy);margin-bottom:8px}
-  .m-card p{color:var(--muted);font-size:15.5px;max-width:420px}
-  @media(max-width:760px){.measure-grid{grid-template-columns:1fr}.m-card{flex-direction:column;text-align:center}}
+  /* Step panels */
+  .wiz-body{padding:clamp(28px,4vw,48px) clamp(24px,4vw,48px)}
+  .wiz-panel{display:none}
+  .wiz-panel.active{display:block;animation:fadeUp .35s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .wiz-title{font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--navy);margin-bottom:8px}
+  .wiz-sub{color:var(--muted);font-size:15px;margin-bottom:32px}
 
-  /* FINDER */
-  .finder-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:26px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
-  .finder-form{background:#fff;padding:clamp(34px,4vw,52px)}
-  .finder-form h3{font-size:24px;color:var(--navy);margin-bottom:6px}
-  .finder-form .sub{color:var(--muted);font-size:14.5px;margin-bottom:28px}
-  .field{margin-bottom:20px}
-  .field label{display:block;font-family:"Sora",sans-serif;font-weight:600;font-size:13px;color:var(--ink);margin-bottom:9px}
-  .field label .hint{font-style:normal;font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);background:var(--blue-tint);padding:3px 8px;border-radius:999px;margin-left:7px}
-  .orline{display:flex;align-items:center;gap:14px;margin:22px 0 18px;color:var(--muted);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  /* Step nav */
+  .wiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+
+  /* Measurement cards */
+  .measure-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:8px}
+  .m-card{background:var(--blue-tint-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+  .m-num{width:38px;height:38px;border-radius:10px;background:var(--blue);color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:16px;display:grid;place-items:center}
+  .m-fig{width:100%;background:#fff;border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:center}
+  .m-fig img{width:100%;max-width:320px;height:auto;display:block}
+  .m-card h3{font-size:20px;color:var(--navy);margin-bottom:6px}
+  .m-card p{color:var(--muted);font-size:14.5px}
+  @media(max-width:600px){.measure-grid{grid-template-columns:1fr}}
+
+  /* Form */
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:"Sora",sans-serif;font-weight:600;font-size:13px;color:var(--ink);margin-bottom:8px}
+  .field label .hint{font-style:normal;font-weight:600;font-size:11px;color:var(--blue);background:var(--blue-tint);padding:3px 9px;border-radius:999px;margin-left:7px}
+  .field input{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:13px;font-family:"Manrope",sans-serif;font-size:15px;color:var(--ink);background:#fff;transition:.2s}
+  .field input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(20,82,230,.12)}
+  .field.err input{border-color:#E0506B;background:#FFF6F7}
+  .field .msg{display:none;color:#D33A57;font-size:12px;margin-top:6px;font-weight:600}
+  .field.err .msg{display:block}
+  .orline{display:flex;align-items:center;gap:12px;margin:20px 0 16px;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
   .orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--line)}
-  .field input,.field select{
-    width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:13px;
-    font-family:"Manrope",sans-serif;font-size:15px;color:var(--ink);background:#fff;transition:.2s;
-  }
-  .field input:focus,.field select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(20,82,230,.12)}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:var(--blue-tint-2);padding:6px;border-radius:14px}
-  .seg button{
-    border:0;background:transparent;padding:11px;border-radius:10px;cursor:pointer;
-    font-family:"Sora",sans-serif;font-weight:600;font-size:14px;color:var(--muted);transition:.2s;
-  }
-  .seg button.on{background:#fff;color:var(--blue);box-shadow:var(--shadow-soft)}
-  .finder-form .btn-primary{width:100%;justify-content:center;margin-top:8px}
+  .form-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+  @media(max-width:640px){.form-cols{grid-template-columns:1fr}}
 
-  .finder-result{
-    background:linear-gradient(160deg,var(--navy),#0B3BB0 130%);
-    color:#fff;padding:clamp(34px,4vw,52px);display:flex;flex-direction:column;justify-content:center;
-    position:relative;overflow:hidden;
-  }
-  .finder-result::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.10),transparent 70%);top:-120px;right:-90px}
-  .res-empty{text-align:center;opacity:.85}
-  .res-empty svg{margin:0 auto 18px;opacity:.6}
-  .res-empty h4{font-family:"Sora",sans-serif;font-size:20px;margin-bottom:8px}
-  .res-empty p{font-size:14.5px;color:#B9CBEC;max-width:300px;margin:0 auto}
-  .res-card{display:none}
-  .res-card .tag{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#9FBCF0;font-family:"Sora",sans-serif;font-weight:600}
-  .res-size{font-family:"Sora",sans-serif;font-size:clamp(56px,9vw,88px);font-weight:800;line-height:1;margin:14px 0 6px}
-  .res-cat{font-size:17px;color:#CDDCF6;margin-bottom:26px}
-  .res-meta{display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(255,255,255,.16);padding-top:24px}
-  .res-meta .r{display:flex;justify-content:space-between;font-size:14.5px}
+  /* Step 3 result */
+  .step3-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+  @media(max-width:640px){.step3-grid{grid-template-columns:1fr}}
+  .result-box{background:linear-gradient(160deg,var(--navy),#0B3BB0 130%);border-radius:20px;padding:36px;color:#fff;position:relative;overflow:hidden}
+  .result-box::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.10),transparent 70%);top:-80px;right:-60px}
+  .res-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9FBCF0;font-family:"Sora",sans-serif;font-weight:600}
+  .res-size{font-family:"Sora",sans-serif;font-size:clamp(56px,9vw,88px);font-weight:800;line-height:1;margin:10px 0 4px}
+  .res-cat{font-size:16px;color:#CDDCF6;margin-bottom:22px}
+  .res-meta{display:flex;flex-direction:column;gap:10px;border-top:1px solid rgba(255,255,255,.16);padding-top:20px}
+  .res-meta .r{display:flex;justify-content:space-between;font-size:14px}
   .res-meta .r span{color:#9FBCF0}
   .res-meta .r b{font-family:"Sora",sans-serif}
-  .res-note{margin-top:24px;font-size:13px;color:#9FBCF0;background:rgba(255,255,255,.07);padding:13px 16px;border-radius:12px;display:flex;gap:10px}
-  @media(max-width:860px){.finder-grid{grid-template-columns:1fr}}
-
-  /* CHARTS — seamless continuation of finder section */
-  #charts{background:var(--white)}
-  .charts-head{text-align:center;margin-bottom:28px}
-  .charts-head p{color:var(--muted);font-size:15px;font-style:italic}
-  .tabs{display:flex;gap:10px;justify-content:center;margin-bottom:34px;flex-wrap:wrap}
-  .tabs button{
-    font-family:"Sora",sans-serif;font-weight:600;font-size:15px;cursor:pointer;
-    padding:13px 30px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--muted);transition:.22s;
-  }
-  .tabs button.on{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:var(--shadow)}
-  .table-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;max-width:840px;margin:0 auto;box-shadow:var(--shadow-soft)}
+  .res-note{margin-top:20px;font-size:12.5px;color:#9FBCF0;background:rgba(255,255,255,.07);padding:12px 14px;border-radius:11px;display:flex;gap:9px}
+  .ref-label{font-family:"Sora",sans-serif;font-weight:700;font-size:15px;color:var(--navy);margin-bottom:14px}
   table{width:100%;border-collapse:collapse}
-  thead th{background:var(--navy);color:#fff;font-family:"Sora",sans-serif;font-weight:600;font-size:14px;padding:18px 22px;text-align:left}
-  tbody td{padding:17px 22px;border-bottom:1px solid var(--line);font-size:15.5px}
+  .table-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-soft)}
+  thead th{background:var(--navy);color:#fff;font-family:"Sora",sans-serif;font-weight:600;font-size:13px;padding:15px 18px;text-align:left}
+  tbody td{padding:13px 18px;border-bottom:1px solid var(--line);font-size:14.5px}
   tbody tr:last-child td{border-bottom:0}
   tbody tr:hover{background:var(--blue-tint)}
-  tbody td:first-child{font-family:"Sora",sans-serif;font-weight:700;color:var(--blue);font-size:17px}
-  .tbl{display:none}.tbl.on{display:block;animation:fade .4s ease}
-  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  tbody td:first-child{font-family:"Sora",sans-serif;font-weight:700;color:var(--blue);font-size:15px}
 
-  /* GLOVE DIMENSIONS */
-  .dim-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
-  .dim-fig{
-    background:linear-gradient(170deg,#fff,#F4F8FF 75%);border:1px solid var(--line);
-    border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-soft);
-  }
-  .dim-fig img{width:100%;mix-blend-mode:multiply}
-  .dim-cap{display:block;margin-top:16px;color:var(--muted);font-size:13.5px;text-align:center}
-  @media(max-width:820px){.dim-grid{grid-template-columns:1fr}}
-
-  /* CTA + FOOTER */
-  .cta{padding-bottom:0}
-  .cta-box{
-    max-width:var(--maxw);margin:0 auto;border-radius:30px;text-align:center;
-    background:linear-gradient(150deg,var(--blue),#0B3BB0);color:#fff;
-    padding:clamp(54px,7vw,90px) 24px;position:relative;overflow:hidden;
-  }
-  .cta-box::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 320px at 50% -10%,rgba(255,255,255,.18),transparent 60%)}
-  .cta-box h2{position:relative;font-size:clamp(28px,4vw,44px);font-weight:700;margin-bottom:16px}
-  .cta-box p{position:relative;color:#D5E2FA;max-width:520px;margin:0 auto 32px;font-size:17px}
-  .cta-box .btn{position:relative;background:#fff;color:var(--blue)}
-  .cta-box .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px -16px rgba(0,0,0,.4)}
-  footer{padding:42px 24px;border-top:1px solid var(--line);margin-top:clamp(48px,7vw,90px)}
-  .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  /* Footer */
+  footer{padding:40px 24px;border-top:1px solid var(--line)}
+  .foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
   .foot p{color:var(--muted);font-size:13.5px}
   .foot-tag{max-width:420px;text-align:center;flex:1}
+  .foot .logo img{height:32px}
 
-  .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in{opacity:1;transform:none}
-
-  /* PREMIUM POLISH */
-  header{transition:box-shadow .3s,background .3s}
-  header.scrolled{box-shadow:0 10px 30px -20px rgba(10,37,64,.28)}
-  .btn-primary{background:linear-gradient(180deg,#1A5BEA,#1148CE);box-shadow:0 12px 26px -12px rgba(20,82,230,.55),0 1px 0 rgba(255,255,255,.25) inset}
-  .btn-primary:hover{background:linear-gradient(180deg,#1550DA,#0E3FBE)}
-  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(20,82,230,.45);outline-offset:2px;border-radius:8px}
-  .field.err input{border-color:#E0506B;background:#FFF6F7}
-  .field .msg{display:none;color:#D33A57;font-size:12.5px;margin-top:7px;font-weight:600}
-  .field.err .msg{display:block}
-  .res-card{animation:popIn .55s cubic-bezier(.18,.9,.25,1.1)}
-  @keyframes popIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(20,82,230,.45);outline-offset:2px;border-radius:8px}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -292,10 +165,9 @@
       <h1>Find Your <em>Perfect Fit</em> with Syrebo</h1>
       <p>Enter your hand measurements and get the right Syrebo rehabilitation glove size in seconds — a precise, comfortable fit for every hand, from children to adults.</p>
       <div class="hero-cta">
-        <a href="#finder" class="btn btn-primary">Start Sizing
+        <a href="#wizard" class="btn btn-primary" id="heroStart">Start Sizing
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="#measure" class="btn btn-ghost">How to Measure</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -308,128 +180,150 @@
   </div>
 </section>
 
-<!-- MEASURE -->
-<section id="measure">
+<!-- WIZARD -->
+<section id="wizard">
   <div class="wrap">
-    <div class="step-label reveal">
-      <div class="step-num">1</div>
-      <h2>How to Measure</h2>
-    </div>
-    <div class="measure-grid">
-      <div class="m-card reveal">
-        <div class="num">1</div>
-        <div class="fig"><img src="assets/hand-length.png" alt="Hand length measurement" /></div>
-        <div>
-          <h3>Hand Length</h3>
-          <p>Measure vertically from the tip of the middle finger straight down to the wrist crease.</p>
+    <div class="wiz-card">
+
+      <!-- Progress header -->
+      <div class="wiz-header">
+        <div class="wiz-pill active" id="pill1">
+          <div class="wiz-pill-num">1</div>
+          <span class="wiz-pill-lbl">How to Measure</span>
+        </div>
+        <div class="wiz-connector"></div>
+        <div class="wiz-pill" id="pill2">
+          <div class="wiz-pill-num">2</div>
+          <span class="wiz-pill-lbl">Measurements</span>
+        </div>
+        <div class="wiz-connector"></div>
+        <div class="wiz-pill" id="pill3">
+          <div class="wiz-pill-num">3</div>
+          <span class="wiz-pill-lbl">Your Size</span>
         </div>
       </div>
-      <div class="m-card reveal">
-        <div class="num">2</div>
-        <div class="fig"><img src="assets/hand-width.png" alt="Hand width measurement" /></div>
-        <div>
-          <h3>Hand Width</h3>
-          <p>Measure across the widest part of the palm, at the knuckles of the metacarpal joints.</p>
+
+      <div class="wiz-body">
+
+        <!-- STEP 1 -->
+        <div class="wiz-panel active" id="step1">
+          <h2 class="wiz-title">How to Measure</h2>
+          <p class="wiz-sub">Grab a ruler or tape measure. Measure the rehabilitation hand flat and relaxed.</p>
+          <div class="measure-grid">
+            <div class="m-card">
+              <div class="m-num">1</div>
+              <div class="m-fig"><img src="assets/hand-length.png" alt="Hand length measurement" /></div>
+              <div>
+                <h3>Hand Length</h3>
+                <p>Measure vertically from the tip of the middle finger straight down to the wrist crease.</p>
+              </div>
+            </div>
+            <div class="m-card">
+              <div class="m-num">2</div>
+              <div class="m-fig"><img src="assets/hand-width.png" alt="Hand width measurement" /></div>
+              <div>
+                <h3>Hand Width</h3>
+                <p>Measure across the widest part of the palm, at the knuckles of the metacarpal joints.</p>
+              </div>
+            </div>
+          </div>
+          <div class="wiz-nav">
+            <div></div>
+            <button class="btn btn-primary" onclick="goStep(2)">Next — Enter Measurements
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
+
+        <!-- STEP 2 -->
+        <div class="wiz-panel" id="step2">
+          <h2 class="wiz-title">Enter Your Measurements</h2>
+          <p class="wiz-sub">Fill in your hand measurements below to get your recommended size instantly.</p>
+          <div class="form-cols">
+            <div>
+              <div class="field" id="fLen">
+                <label for="len">Hand length (mm) <em class="hint">Required</em></label>
+                <input id="len" type="number" min="0" placeholder="e.g. 185" />
+                <div class="msg">Please enter your hand length.</div>
+              </div>
+              <div class="field" id="fWid">
+                <label for="wid">Hand width (mm) <em class="hint">Required</em></label>
+                <input id="wid" type="number" min="0" placeholder="e.g. 92" />
+                <div class="msg">Please enter your hand width.</div>
+              </div>
+              <div class="orline"><span>optional — estimate from</span></div>
+              <div class="row2">
+                <div class="field">
+                  <label for="height">Height (cm) <em class="hint">optional</em></label>
+                  <input id="height" type="number" min="0" placeholder="e.g. 170" />
+                </div>
+                <div class="field">
+                  <label for="weight">Weight (kg) <em class="hint">optional</em></label>
+                  <input id="weight" type="number" min="0" placeholder="e.g. 65" />
+                </div>
+              </div>
+            </div>
+            <div class="m-card" style="justify-content:center;min-height:220px;background:var(--blue-tint-2)">
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" style="opacity:.35"><path d="M9 11l3 3L22 4" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p style="color:var(--muted);font-size:14px;text-align:center;max-width:200px">Fill in your measurements and click <strong>Get My Size</strong></p>
+            </div>
+          </div>
+          <div class="wiz-nav">
+            <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+            <button class="btn btn-primary" id="calcBtn">Get My Size
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="wiz-panel" id="step3">
+          <h2 class="wiz-title">Your Recommended Size</h2>
+          <p class="wiz-sub">Based on your measurements, here is the best-fit Syrebo glove size for you.</p>
+          <div class="step3-grid">
+            <div class="result-box">
+              <div class="res-tag">Recommended size</div>
+              <div class="res-size" id="resSize">—</div>
+              <div class="res-cat" id="resCat"></div>
+              <div class="res-meta">
+                <div class="r"><span>Hand length</span><b id="rLen">—</b></div>
+                <div class="r"><span>Hand width</span><b id="rWid">—</b></div>
+                <div class="r"><span>Fit confidence</span><b id="rConf">—</b></div>
+              </div>
+              <div class="res-note">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="9" stroke="#9FBCF0" stroke-width="1.6"/><path d="M12 8h.01M11 12h1v4h1" stroke="#9FBCF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span id="rNote"></span>
+              </div>
+            </div>
+            <div>
+              <p class="ref-label">Full size reference</p>
+              <div class="table-wrap">
+                <table><thead><tr><th>Size</th><th>Hand Length (mm)</th><th>Hand Width (mm)</th></tr></thead>
+                <tbody>
+                  <tr><td>XL</td><td>195 – 210</td><td>100 – 115</td></tr>
+                  <tr><td>L</td><td>180 – 198</td><td>90 – 105</td></tr>
+                  <tr><td>M</td><td>160 – 185</td><td>80 – 95</td></tr>
+                  <tr><td>S</td><td>145 – 165</td><td>70 – 80</td></tr>
+                  <tr><td>12</td><td>138 – 153</td><td>65 – 72</td></tr>
+                  <tr><td>9</td><td>126 – 145</td><td>60 – 67</td></tr>
+                  <tr><td>7</td><td>119 – 135</td><td>55 – 62</td></tr>
+                  <tr><td>5</td><td>108 – 126</td><td>50 – 57</td></tr>
+                  <tr><td>3</td><td>100 – 115</td><td>48 – 55</td></tr>
+                  <tr><td>1.5</td><td>85 – 95</td><td>40 – 48</td></tr>
+                </tbody></table>
+              </div>
+            </div>
+          </div>
+          <div class="wiz-nav">
+            <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+            <button class="btn btn-ghost" onclick="goStep(1)">Start Over</button>
+          </div>
+        </div>
+
+      </div><!-- /wiz-body -->
+    </div><!-- /wiz-card -->
   </div>
 </section>
-
-<!-- FINDER -->
-<section id="finder">
-  <div class="wrap">
-    <div class="step-label reveal">
-      <div class="step-num">2</div>
-      <h2>Enter Your Measurements</h2>
-    </div>
-    <div class="finder-grid reveal">
-      <div class="finder-form">
-        <h3>Your details</h3>
-        <p class="sub">Enter your hand length for the most accurate result — or just your height and weight for a quick estimate.</p>
-
-        <div class="field" id="fLen">
-          <label for="len">Hand length (mm) <em class="hint">Required</em></label>
-          <input id="len" type="number" min="0" placeholder="e.g. 185" />
-          <div class="msg">Please enter your hand length.</div>
-        </div>
-
-        <div class="field" id="fWid">
-          <label for="wid">Hand width (mm) <em class="hint">Required</em></label>
-          <input id="wid" type="number" min="0" placeholder="e.g. 92" />
-          <div class="msg">Please enter your hand width.</div>
-        </div>
-
-        <div class="orline"><span>optional — estimate from</span></div>
-
-        <div class="row2">
-          <div class="field">
-            <label for="height">Height (cm) <em class="hint">optional</em></label>
-            <input id="height" type="number" min="0" placeholder="e.g. 170" />
-          </div>
-          <div class="field">
-            <label for="weight">Weight (kg) <em class="hint">optional</em></label>
-            <input id="weight" type="number" min="0" placeholder="e.g. 65" />
-          </div>
-        </div>
-
-        <button class="btn btn-primary" id="calcBtn">
-          Get my size
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-
-      <div class="finder-result">
-        <div class="res-empty" id="resEmpty">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <h4>Your recommendation</h4>
-          <p>Complete the form and we'll match you to the ideal glove size.</p>
-        </div>
-        <div class="res-card" id="resCard">
-          <div class="tag">Recommended size</div>
-          <div class="res-size" id="resSize">M</div>
-          <div class="res-cat" id="resCat">Adult</div>
-          <div class="res-meta">
-            <div class="r"><span>Hand length</span><b id="rLen">— mm</b></div>
-            <div class="r"><span>Hand width</span><b id="rWid">— mm</b></div>
-            <div class="r"><span>Fit confidence</span><b id="rConf">—</b></div>
-          </div>
-          <div class="res-note">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="9" stroke="#9FBCF0" stroke-width="1.6"/><path d="M12 8h.01M11 12h1v4h1" stroke="#9FBCF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span id="rNote">Borderline measurements are matched to the closest size for comfort.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CHARTS — flows directly below Step 2, same bg, no step number -->
-<section id="charts" style="padding-top:0">
-  <div class="wrap">
-    <div class="charts-head reveal">
-      <p>Not sure about your measurements? Use the full reference table below.</p>
-    </div>
-    <div class="reveal">
-      <div class="table-wrap" style="max-width:840px;margin:0 auto">
-        <table><thead><tr><th>Size</th><th>Hand Length (mm)</th><th>Hand Width (mm)</th></tr></thead>
-        <tbody>
-          <tr><td>XL</td><td>195 – 210</td><td>100 – 115</td></tr>
-          <tr><td>L</td><td>180 – 198</td><td>90 – 105</td></tr>
-          <tr><td>M</td><td>160 – 185</td><td>80 – 95</td></tr>
-          <tr><td>S</td><td>145 – 165</td><td>70 – 80</td></tr>
-          <tr><td>12</td><td>138 – 153</td><td>65 – 72</td></tr>
-          <tr><td>9</td><td>126 – 145</td><td>60 – 67</td></tr>
-          <tr><td>7</td><td>119 – 135</td><td>55 – 62</td></tr>
-          <tr><td>5</td><td>108 – 126</td><td>50 – 57</td></tr>
-          <tr><td>3</td><td>100 – 115</td><td>48 – 55</td></tr>
-          <tr><td>1.5</td><td>85 – 95</td><td>40 – 48</td></tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <footer>
   <div class="foot">
@@ -440,7 +334,6 @@
 </footer>
 
 <script>
-  // full size range, kids through adults — matched automatically
   const SIZES = [
     {s:"XL", cat:"Adult",   l:[195,210], w:[100,115]},
     {s:"L",  cat:"Adult",   l:[180,198], w:[90,105]},
@@ -453,86 +346,72 @@
     {s:"3",  cat:"Toddler", l:[100,115], w:[48,55]},
     {s:"1.5",cat:"Toddler", l:[85,95],   w:[40,48]}
   ];
-  // rough hand-length(mm) ≈ height(cm) × factor (estimate only)
-  const HFACTOR=1.08;
+  const HFACTOR = 1.08;
 
   function gap(v,[a,b]){ return v<a ? a-v : v>b ? v-b : 0; }
   function centerDist(v,[a,b]){ return Math.abs(v-(a+b)/2)/((b-a)/2||1); }
 
-  function recommend(){
-    const len=parseFloat(document.getElementById("len").value);
-    const wid=parseFloat(document.getElementById("wid").value);
-    const ht =parseFloat(document.getElementById("height").value);
-    const fLen=document.getElementById("fLen");
-    const fWid=document.getElementById("fWid");
-    const hasLen=len>0, hasWid=wid>0, hasHt=ht>0;
-
-    // Both hand length and hand width are required (unless using height fallback for length).
-    let invalid=false;
-    if(!hasLen && !hasHt){ fLen.classList.add("err"); invalid=true; }
-    else { fLen.classList.remove("err"); }
-    if(!hasWid){ fWid.classList.add("err"); invalid=true; }
-    else { fWid.classList.remove("err"); }
-    if(invalid){
-      (!hasLen && !hasHt ? document.getElementById("len") : document.getElementById("wid")).focus();
-      return;
-    }
-
-    const estimated=!hasLen;
-    const L=hasLen ? len : Math.round(ht*HFACTOR);
-    const useW=hasWid;
-
-    let best=null,bestScore=Infinity,exact=false;
-    SIZES.forEach(o=>{
-      const g=gap(L,o.l)+(useW?gap(wid,o.w):0);
-      const tie=centerDist(L,o.l)+(useW?centerDist(wid,o.w):0);
-      const score=g*1000+tie;
-      if(score<bestScore){bestScore=score;best=o;exact=(g===0);}
+  function goStep(n){
+    document.querySelectorAll('.wiz-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('step'+n).classList.add('active');
+    [1,2,3].forEach(i=>{
+      const pill = document.getElementById('pill'+i);
+      pill.classList.toggle('active', i===n);
+      pill.classList.toggle('done', i<n);
     });
-
-    document.getElementById("resEmpty").style.display="none";
-    document.getElementById("resCard").style.display="block";
-    document.getElementById("resSize").textContent=best.s;
-    document.getElementById("resCat").textContent=best.cat+(estimated?" · estimated from height":" · measured hand");
-    document.getElementById("rLen").textContent=L+" mm"+(estimated?" (est.)":"");
-    document.getElementById("rWid").textContent=useW?wid+" mm":"—";
-    document.getElementById("rConf").textContent=estimated?"Estimate":(exact?"Excellent":"Closest match");
-    document.getElementById("rNote").textContent=estimated
-      ? "Estimated from your height. For the most accurate fit, measure your hand length and check again."
-      : (exact
-          ? "Your measurements fall comfortably within the "+best.cat+" "+best.s+" range."
-          : "No size fully covered your measurements, so we matched you to the closest size.");
-
-    document.getElementById("resCard").scrollIntoView({behavior:"smooth",block:"nearest"});
+    document.getElementById('wizard').scrollIntoView({behavior:'smooth', block:'start'});
   }
-  const fLenEl=document.getElementById("fLen");
-  const fWidEl=document.getElementById("fWid");
-  document.getElementById("calcBtn").addEventListener("click",recommend);
-  ["len","wid","height","weight"].forEach(id=>{
-    const el=document.getElementById(id);
-    el.addEventListener("keydown",e=>{ if(e.key==="Enter") recommend(); });
-    el.addEventListener("input",()=>{ fLenEl.classList.remove("err"); fWidEl.classList.remove("err"); });
-  });
-  const hdr=document.querySelector("header");
-  addEventListener("scroll",()=>hdr.classList.toggle("scrolled",scrollY>10),{passive:true});
 
-  // charts tabs
-  document.querySelectorAll("#chartTabs button").forEach(b=>{
-    b.addEventListener("click",()=>{
-      document.querySelectorAll("#chartTabs button").forEach(x=>x.classList.remove("on"));
-      b.classList.add("on");
-      document.querySelectorAll(".tbl").forEach(t=>t.classList.toggle("on",t.dataset.tbl===b.dataset.t));
+  document.getElementById('calcBtn').addEventListener('click', function(){
+    const len = parseFloat(document.getElementById('len').value);
+    const wid = parseFloat(document.getElementById('wid').value);
+    const ht  = parseFloat(document.getElementById('height').value);
+    const fLen = document.getElementById('fLen');
+    const fWid = document.getElementById('fWid');
+    const hasLen=len>0, hasWid=wid>0, hasHt=ht>0;
+    let invalid=false;
+    if(!hasLen && !hasHt){ fLen.classList.add('err'); invalid=true; } else { fLen.classList.remove('err'); }
+    if(!hasWid){ fWid.classList.add('err'); invalid=true; } else { fWid.classList.remove('err'); }
+    if(invalid){ (!hasLen&&!hasHt ? document.getElementById('len') : document.getElementById('wid')).focus(); return; }
+
+    const estimated = !hasLen;
+    const L = hasLen ? len : Math.round(ht*HFACTOR);
+    let best=null, bestScore=Infinity, exact=false;
+    SIZES.forEach(o=>{
+      const g = gap(L,o.l) + gap(wid,o.w);
+      const tie = centerDist(L,o.l) + centerDist(wid,o.w);
+      const score = g*1000+tie;
+      if(score<bestScore){ bestScore=score; best=o; exact=(g===0); }
     });
+
+    document.getElementById('resSize').textContent = best.s;
+    document.getElementById('resCat').textContent  = best.cat + (estimated?' · estimated from height':' · measured hand');
+    document.getElementById('rLen').textContent = L+'mm'+(estimated?' (est.)':'');
+    document.getElementById('rWid').textContent = wid+'mm';
+    document.getElementById('rConf').textContent = estimated?'Estimate':(exact?'Excellent':'Closest match');
+    document.getElementById('rNote').textContent = estimated
+      ? 'Estimated from your height. For the most accurate fit, measure your hand length and try again.'
+      : (exact
+        ? 'Your measurements fall comfortably within the '+best.cat+' '+best.s+' range.'
+        : 'No size fully covered your measurements — matched to the closest available size.');
+
+    goStep(3);
   });
 
-  // reveal on scroll
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);} });
-  },{threshold:.12});
-  document.querySelectorAll(".reveal").forEach((el,i)=>{
-    el.style.transitionDelay=(i%3*80)+"ms";
-    io.observe(el);
+  ['len','wid','height','weight'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('calcBtn').click(); });
+    el.addEventListener('input', ()=>{ document.getElementById('fLen').classList.remove('err'); document.getElementById('fWid').classList.remove('err'); });
   });
+
+  document.getElementById('heroStart').addEventListener('click', e=>{
+    e.preventDefault();
+    goStep(1);
+    document.getElementById('wizard').scrollIntoView({behavior:'smooth'});
+  });
+
+  const hdr=document.querySelector('header');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>10),{passive:true});
 </script>
 </body>
 </html>
