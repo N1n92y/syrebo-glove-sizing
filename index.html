@@ -1,401 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Syrebo · Find Your Perfect Fit</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  :root{
-    --navy:#0A2540; --blue:#1452E6; --blue-deep:#0B3BB0;
-    --blue-tint:#EAF1FE; --blue-tint-2:#F4F8FF;
-    --line:#E3EAF5; --muted:#5C7088; --ink:#11233b;
-    --shadow:0 18px 50px -22px rgba(20,82,230,.32);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;overflow:hidden;font-family:"Manrope",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
-  h1,h2,h3{font-family:"Sora",sans-serif;letter-spacing:-.02em}
-  img{max-width:100%;display:block}
-  a{color:inherit;text-decoration:none}
+:root{
+  --navy:#0A2540;--blue:#1452E6;--blue-deep:#0B3BB0;
+  --blue-tint:#EAF1FE;--blue-tint-2:#F4F8FF;
+  --line:#E3EAF5;--muted:#5C7088;--ink:#11233b;
+  --white:#fff;--maxw:1160px;
+  --ease:.55s cubic-bezier(.22,.9,.25,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Manrope",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Sora",sans-serif;letter-spacing:-.02em}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
 
-  /* ── DECK CONTAINER ── */
-  .deck{position:fixed;inset:0;display:flex;flex-direction:column}
+/* NAV */
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+header.scrolled{box-shadow:0 8px 32px -16px rgba(10,37,64,.2)}
+.nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 28px}
+.logo img{height:36px;width:auto}
+.badges img{height:46px;width:auto;opacity:.9}
+@media(max-width:680px){.badges{display:none}}
 
-  /* ── TOP BAR ── */
-  .topbar{
-    flex-shrink:0;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 32px;height:62px;
-    background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);z-index:10;
-  }
-  .logo img{height:36px;width:auto}
-  .badges img{height:44px;width:auto;opacity:.92}
-  @media(max-width:640px){.badges{display:none}}
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;
+  padding:clamp(72px,9vw,120px) 28px clamp(80px,10vw,130px);
+  background:linear-gradient(160deg,#f0f5ff 0%,#fff 55%);
+}
+.hero::after{
+  content:"";position:absolute;right:-180px;top:-120px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(20,82,230,.12) 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero-inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:"Sora",sans-serif;font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);background:var(--blue-tint);padding:7px 16px;border-radius:999px;margin-bottom:22px}
+.hero-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.hero h1{font-size:clamp(34px,4.8vw,62px);font-weight:800;color:var(--navy);line-height:1.08;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--blue);position:relative}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:9px;background:rgba(20,82,230,.15);z-index:-1;border-radius:3px}
+.hero-desc{font-size:clamp(15px,1.4vw,18px);color:var(--muted);line-height:1.7;max-width:480px;margin-bottom:34px}
+.btn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;font-family:"Sora",sans-serif;font-weight:600;font-size:14.5px;padding:14px 26px;border-radius:999px;border:0;transition:.22s;white-space:nowrap}
+.btn-primary{background:linear-gradient(180deg,#1A5BEA,#1148CE);color:#fff;box-shadow:0 10px 24px -10px rgba(20,82,230,.55),0 1px 0 rgba(255,255,255,.22) inset}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(20,82,230,.6)}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-glow{position:absolute;width:90%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(20,82,230,.16),transparent 65%)}
+.hero-ring{position:absolute;width:75%;aspect-ratio:1;border:1.5px dashed rgba(20,82,230,.25);border-radius:50%;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-glove{width:min(340px,78%);position:relative;z-index:1;filter:drop-shadow(0 32px 48px rgba(11,59,176,.26));animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media(max-width:820px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-visual{order:-1}.hero-glove{width:min(220px,55%)}
+  .hero-tag{margin-left:auto;margin-right:auto}
+}
 
-  /* ── SLIDE AREA ── */
-  .slides{flex:1;position:relative;overflow:hidden}
-  .slide{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:24px 32px;
-    opacity:0;pointer-events:none;
-    transition:opacity .45s ease, transform .45s ease;
-    transform:translateX(60px);
-  }
-  .slide.active{opacity:1;pointer-events:auto;transform:translateX(0)}
-  .slide.exit-left{opacity:0;transform:translateX(-60px)}
+/* TOOL SECTION */
+.tool-section{padding:clamp(56px,8vw,100px) 28px;background:#fff}
+.tool-inner{max-width:var(--maxw);margin:0 auto}
+.tool-label{font-family:"Sora",sans-serif;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.tool-heading{font-size:clamp(26px,3.4vw,42px);font-weight:800;color:var(--navy);margin-bottom:10px}
+.tool-sub{color:var(--muted);font-size:16px;margin-bottom:48px;max-width:560px}
 
-  /* Slide backgrounds */
-  .slide-hero{background:linear-gradient(160deg,var(--blue-tint-2) 0%,#fff 60%)}
-  .slide-measure{background:var(--blue-tint-2)}
-  .slide-input{background:#fff}
-  .slide-result{background:linear-gradient(160deg,var(--navy) 0%,var(--blue-deep) 100%);color:#fff}
+/* STEP PROGRESS */
+.step-track{display:flex;align-items:center;gap:0;margin-bottom:44px;max-width:520px}
+.step-item{display:flex;align-items:center;gap:10px;position:relative}
+.step-circle{
+  width:38px;height:38px;border-radius:50%;border:2px solid var(--line);
+  display:grid;place-items:center;font-family:"Sora",sans-serif;font-weight:700;font-size:14px;
+  color:var(--muted);background:#fff;transition:var(--ease);flex-shrink:0;
+}
+.step-item.active .step-circle{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 18px -4px rgba(20,82,230,.5)}
+.step-item.done .step-circle{background:var(--blue-tint);border-color:var(--blue);color:var(--blue)}
+.step-item.done .step-circle::after{content:"✓";font-size:13px}
+.step-item.done .step-circle span{display:none}
+.step-name{font-family:"Sora",sans-serif;font-weight:600;font-size:13px;color:var(--muted);transition:.3s}
+.step-item.active .step-name{color:var(--navy)}
+.step-line{flex:1;height:2px;background:var(--line);margin:0 12px;transition:background .5s;min-width:32px}
+.step-line.done{background:var(--blue)}
+@media(max-width:600px){.step-name{display:none}}
 
-  /* ── BOTTOM NAV ── */
-  .botnav{
-    flex-shrink:0;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 32px;height:68px;
-    background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
-    border-top:1px solid var(--line);
-  }
-  .dots{display:flex;gap:8px}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--line);transition:.3s;cursor:pointer}
-  .dot.active{background:var(--blue);width:22px;border-radius:4px}
-  .btn{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:"Sora",sans-serif;font-weight:600;font-size:14px;padding:12px 24px;border-radius:999px;border:0;transition:.22s}
-  .btn-primary{background:linear-gradient(180deg,#1A5BEA,#1148CE);color:#fff;box-shadow:0 8px 20px -8px rgba(20,82,230,.55)}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 24px -10px rgba(20,82,230,.6)}
-  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
-  .btn-white{background:#fff;color:var(--blue);border:1.5px solid rgba(255,255,255,.3)}
-  .btn-white:hover{background:var(--blue-tint)}
-  .nav-right{display:flex;gap:10px;align-items:center}
+/* STEP PANELS */
+.step-panels{position:relative;min-height:380px}
+.step-panel{display:none;animation:fadeUp .4s var(--ease)}
+.step-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
-  /* ── SLIDE 1: HERO ── */
-  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1060px;width:100%}
-  .hero-text .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:"Sora",sans-serif;font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);background:var(--blue-tint);padding:7px 14px;border-radius:999px;margin-bottom:18px}
-  .hero-text .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
-  .hero-text h1{font-size:clamp(30px,4.2vw,56px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:16px}
-  .hero-text h1 em{font-style:normal;color:var(--blue)}
-  .hero-text p{font-size:clamp(14px,1.3vw,17px);color:var(--muted);line-height:1.65;max-width:460px;margin-bottom:28px}
-  .hero-visual{position:relative;display:flex;justify-content:center}
-  .hero-visual .halo{position:absolute;width:110%;aspect-ratio:1;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(20,82,230,.14),transparent 62%)}
-  .hero-visual .ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:84%;aspect-ratio:1;border:1.5px dashed rgba(20,82,230,.3);border-radius:50%;animation:spin 36s linear infinite}
-  @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-  .glove-img{width:min(320px,72%);filter:drop-shadow(0 28px 40px rgba(11,59,176,.28));animation:float 6s ease-in-out infinite;position:relative;z-index:1}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  @media(max-width:760px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero-text p{margin-left:auto;margin-right:auto}.hero-visual{order:-1}.glove-img{width:min(220px,55%)}}
+/* STEP 1: MEASURE */
+.measure-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px}
+.m-card{
+  background:var(--blue-tint-2);border:1px solid var(--line);border-radius:22px;
+  padding:28px 24px;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:16px;transition:.3s;
+}
+.m-card:hover{border-color:rgba(20,82,230,.25);box-shadow:0 12px 40px -18px rgba(20,82,230,.18);transform:translateY(-3px)}
+.m-badge{width:36px;height:36px;border-radius:10px;background:var(--blue);color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:15px;display:grid;place-items:center}
+.m-fig{width:100%;background:#fff;border-radius:14px;padding:18px;display:flex;align-items:center;justify-content:center}
+.m-fig img{width:100%;max-width:240px;height:auto}
+.m-card h3{font-size:18px;color:var(--navy);margin-bottom:4px}
+.m-card p{color:var(--muted);font-size:13.5px;line-height:1.6}
+@media(max-width:580px){.measure-grid{grid-template-columns:1fr}}
 
-  /* ── SLIDE 2: MEASURE ── */
-  .measure-wrap{max-width:880px;width:100%}
-  .slide-title{font-size:clamp(20px,2.8vw,34px);font-weight:700;color:var(--navy);margin-bottom:6px}
-  .slide-sub{color:var(--muted);font-size:14px;margin-bottom:24px}
-  .m-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .m-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
-  .m-num{width:34px;height:34px;border-radius:9px;background:var(--blue);color:#fff;font-family:"Sora",sans-serif;font-weight:700;font-size:15px;display:grid;place-items:center;flex-shrink:0}
-  .m-fig{width:100%;background:var(--blue-tint);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center}
-  .m-fig img{width:100%;max-width:260px;height:auto}
-  .m-card h3{font-size:17px;color:var(--navy);margin-bottom:4px}
-  .m-card p{color:var(--muted);font-size:13px}
-  @media(max-width:600px){.m-grid{grid-template-columns:1fr}}
+/* STEP 2: INPUT */
+.input-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:680px){.input-layout{grid-template-columns:1fr}}
+.field{margin-bottom:18px}
+.field label{display:flex;align-items:center;gap:0;font-family:"Sora",sans-serif;font-weight:600;font-size:12.5px;color:var(--ink);margin-bottom:8px}
+.badge-hint{font-style:normal;font-weight:600;font-size:10px;color:var(--blue);background:var(--blue-tint);padding:2px 8px;border-radius:999px;margin-left:8px}
+.field input{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:13px;font-family:"Manrope",sans-serif;font-size:15px;color:var(--ink);background:#fff;transition:.2s;-moz-appearance:textfield}
+.field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none}
+.field input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(20,82,230,.1)}
+.field.err input{border-color:#E0506B;background:#FFF6F7}
+.field .err-msg{display:none;color:#D33A57;font-size:11.5px;margin-top:5px;font-weight:600}
+.field.err .err-msg{display:block}
+.orline{display:flex;align-items:center;gap:10px;margin:16px 0 14px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--line)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.input-hint{
+  background:linear-gradient(140deg,var(--navy) 0%,var(--blue-deep) 100%);
+  border-radius:22px;padding:32px 28px;color:#fff;
+  display:flex;flex-direction:column;justify-content:center;gap:16px;
+}
+.input-hint h4{font-size:17px;font-weight:700;margin-bottom:4px}
+.input-hint p{font-size:13.5px;color:#CDDCF6;line-height:1.65}
+.input-hint .tip{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#9FBCF0}
+.input-hint .tip svg{flex-shrink:0;margin-top:2px}
 
-  /* ── SLIDE 3: INPUT ── */
-  .input-wrap{max-width:760px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-  @media(max-width:640px){.input-wrap{grid-template-columns:1fr}}
-  .form-side{}
-  .field{margin-bottom:16px}
-  .field label{display:block;font-family:"Sora",sans-serif;font-weight:600;font-size:12.5px;color:var(--ink);margin-bottom:7px}
-  .hint{font-style:normal;font-weight:600;font-size:10.5px;color:var(--blue);background:var(--blue-tint);padding:2px 8px;border-radius:999px;margin-left:6px}
-  .field input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:"Manrope",sans-serif;font-size:14px;color:var(--ink);background:#fff;transition:.2s}
-  .field input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px rgba(20,82,230,.12)}
-  .field.err input{border-color:#E0506B;background:#FFF6F7}
-  .field .msg{display:none;color:#D33A57;font-size:11.5px;margin-top:5px;font-weight:600}
-  .field.err .msg{display:block}
-  .orline{display:flex;align-items:center;gap:10px;margin:16px 0 12px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-  .orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--line)}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .hint-side{background:var(--blue-tint-2);border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;min-height:220px}
-  .hint-side p{color:var(--muted);font-size:13px;max-width:200px}
+/* STEP 3: RESULT */
+.result-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:start}
+@media(max-width:680px){.result-layout{grid-template-columns:1fr}}
+.result-card{
+  background:linear-gradient(155deg,var(--navy) 0%,var(--blue-deep) 120%);
+  border-radius:24px;padding:36px;color:#fff;position:relative;overflow:hidden;
+}
+.result-card::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 70%);top:-80px;right:-60px;pointer-events:none}
+.rc-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#9FBCF0;font-family:"Sora",sans-serif;font-weight:600}
+.rc-size{font-family:"Sora",sans-serif;font-size:clamp(60px,8vw,90px);font-weight:800;line-height:1;margin:8px 0 2px}
+.rc-cat{font-size:15px;color:#CDDCF6;margin-bottom:24px}
+.rc-divider{height:1px;background:rgba(255,255,255,.14);margin-bottom:20px}
+.rc-row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:10px}
+.rc-row span{color:#9FBCF0}
+.rc-row b{font-family:"Sora",sans-serif}
+.rc-note{margin-top:18px;font-size:12px;color:#9FBCF0;background:rgba(255,255,255,.07);padding:12px 14px;border-radius:11px;display:flex;gap:9px;line-height:1.55}
+.ref-panel{}
+.ref-title{font-family:"Sora",sans-serif;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:14px}
+.table-wrap{border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 30px -18px rgba(10,37,64,.15)}
+table{width:100%;border-collapse:collapse}
+thead th{background:var(--navy);color:#fff;font-family:"Sora",sans-serif;font-weight:600;font-size:12px;padding:13px 16px;text-align:left}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--line);font-size:13.5px;transition:background .2s}
+tbody tr:last-child td{border-bottom:0}
+tbody td:first-child{font-family:"Sora",sans-serif;font-weight:700;color:var(--blue);font-size:14px}
+tbody tr.hl{background:var(--blue-tint)}
+tbody tr.hl td{color:var(--navy)}
+tbody tr.hl td:first-child{color:var(--blue)}
 
-  /* ── SLIDE 4: RESULT ── */
-  .result-wrap{max-width:860px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-  @media(max-width:640px){.result-wrap{grid-template-columns:1fr}}
-  .result-box{position:relative}
-  .res-label{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9FBCF0;font-family:"Sora",sans-serif;font-weight:600}
-  .res-size{font-family:"Sora",sans-serif;font-size:clamp(52px,8vw,84px);font-weight:800;line-height:1;margin:8px 0 2px}
-  .res-cat{font-size:15px;color:#CDDCF6;margin-bottom:20px}
-  .res-divider{height:1px;background:rgba(255,255,255,.16);margin-bottom:16px}
-  .res-row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:10px}
-  .res-row span{color:#9FBCF0}
-  .res-row b{font-family:"Sora",sans-serif}
-  .res-note{margin-top:16px;font-size:12px;color:#9FBCF0;background:rgba(255,255,255,.08);padding:11px 14px;border-radius:10px;display:flex;gap:8px}
-  .ref-side{}
-  .ref-label{font-family:"Sora",sans-serif;font-weight:700;font-size:14px;color:rgba(255,255,255,.8);margin-bottom:12px}
-  table{width:100%;border-collapse:collapse}
-  .tbl-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.15)}
-  .tbl-wrap thead th{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-family:"Sora",sans-serif;font-weight:600;font-size:12px;padding:11px 14px;text-align:left}
-  .tbl-wrap tbody td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px;color:rgba(255,255,255,.85)}
-  .tbl-wrap tbody tr:last-child td{border-bottom:0}
-  .tbl-wrap tbody tr.highlight td{background:rgba(255,255,255,.12);color:#fff;font-weight:700}
-  .tbl-wrap tbody td:first-child{font-family:"Sora",sans-serif;font-weight:700;color:#7eb3ff}
-  .tbl-wrap tbody tr.highlight td:first-child{color:#fff}
+/* STEP NAV */
+.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:28px;border-top:1px solid var(--line)}
+.step-nav-right{display:flex;gap:10px}
+
+/* FOOTER */
+footer{padding:44px 28px;border-top:1px solid var(--line);background:#fff}
+.foot{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot .logo img{height:30px}
+.foot p{color:var(--muted);font-size:13px}
+.foot-tag{max-width:380px;text-align:center;flex:1;font-size:13px;color:var(--muted);line-height:1.6}
+
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(20,82,230,.4);outline-offset:2px;border-radius:8px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<div class="deck">
+<!-- NAV -->
+<header>
+  <nav class="nav">
+    <a href="/" class="logo"><img src="assets/logo.png" alt="Syrebo"/></a>
+    <div class="badges"><img src="assets/trust-badges.png" alt="80+ countries · 4000+ medical units · 60000+ families"/></div>
+  </nav>
+</header>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <a href="/" class="logo"><img src="assets/logo.png" alt="Syrebo" /></a>
-    <div class="badges"><img src="assets/trust-badges.png" alt="80+ countries · 4000+ medical units · 60000+ families" /></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Smart Sizing Tool</div>
+      <h1>Find Your <em>Perfect Fit</em><br>with Syrebo</h1>
+      <p class="hero-desc">Enter your hand measurements and get your ideal Syrebo rehabilitation glove size in seconds — precise, comfortable, for every hand.</p>
+      <a href="#tool" class="btn btn-primary">Find My Size
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <div class="hero-ring"></div>
+      <img class="hero-glove" src="assets/hero-glove.png" alt="Syrebo rehabilitation glove"/>
+    </div>
   </div>
+</section>
 
-  <!-- SLIDES -->
-  <div class="slides" id="slides">
+<!-- TOOL -->
+<section class="tool-section" id="tool">
+  <div class="tool-inner">
+    <div class="tool-label">Sizing Tool</div>
+    <h2 class="tool-heading">Three steps to your perfect size</h2>
+    <p class="tool-sub">Follow the steps below — measure your hand, enter the numbers, get your result.</p>
 
-    <!-- SLIDE 1: HERO -->
-    <div class="slide slide-hero active" id="slide0">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <div class="eyebrow">Smart Sizing Tool</div>
-          <h1>Find Your <em>Perfect Fit</em><br>with Syrebo</h1>
-          <p>Enter your hand measurements and get the right Syrebo rehabilitation glove size in seconds — a precise, comfortable fit for every hand.</p>
-          <button class="btn btn-primary" onclick="goSlide(1)">Get Started
+    <!-- Step progress -->
+    <div class="step-track">
+      <div class="step-item active" id="si1">
+        <div class="step-circle"><span>1</span></div>
+        <span class="step-name">How to Measure</span>
+      </div>
+      <div class="step-line" id="sl1"></div>
+      <div class="step-item" id="si2">
+        <div class="step-circle"><span>2</span></div>
+        <span class="step-name">Measurements</span>
+      </div>
+      <div class="step-line" id="sl2"></div>
+      <div class="step-item" id="si3">
+        <div class="step-circle"><span>3</span></div>
+        <span class="step-name">Your Size</span>
+      </div>
+    </div>
+
+    <div class="step-panels">
+
+      <!-- STEP 1 -->
+      <div class="step-panel active" id="sp1">
+        <div class="measure-grid">
+          <div class="m-card">
+            <div class="m-badge">1</div>
+            <div class="m-fig"><img src="assets/hand-length.png" alt="Hand length"/></div>
+            <div>
+              <h3>Hand Length</h3>
+              <p>Measure vertically from the tip of the middle finger down to the wrist crease.</p>
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-badge">2</div>
+            <div class="m-fig"><img src="assets/hand-width.png" alt="Hand width"/></div>
+            <div>
+              <h3>Hand Width</h3>
+              <p>Measure across the widest part of the palm at the metacarpal knuckles.</p>
+            </div>
+          </div>
+        </div>
+        <div class="step-nav">
+          <div></div>
+          <button class="btn btn-primary" onclick="goStep(2)">Next — Enter Measurements
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <div class="hero-visual">
-          <div class="halo"></div>
-          <div class="ring"></div>
-          <img class="glove-img" src="assets/hero-glove.png" alt="Syrebo glove" />
-        </div>
       </div>
-    </div>
 
-    <!-- SLIDE 2: HOW TO MEASURE -->
-    <div class="slide slide-measure" id="slide1">
-      <div class="measure-wrap">
-        <h2 class="slide-title">Step 1 — How to Measure</h2>
-        <p class="slide-sub">Grab a ruler or tape measure. Keep the hand flat and relaxed.</p>
-        <div class="m-grid">
-          <div class="m-card">
-            <div class="m-num">1</div>
-            <div class="m-fig"><img src="assets/hand-length.png" alt="Hand length" /></div>
+      <!-- STEP 2 -->
+      <div class="step-panel" id="sp2">
+        <div class="input-layout">
+          <div>
+            <div class="field" id="fLen">
+              <label for="len">Hand length (mm) <em class="badge-hint">Required</em></label>
+              <input id="len" type="number" min="0" placeholder="e.g. 185"/>
+              <div class="err-msg">Please enter your hand length.</div>
+            </div>
+            <div class="field" id="fWid">
+              <label for="wid">Hand width (mm) <em class="badge-hint">Required</em></label>
+              <input id="wid" type="number" min="0" placeholder="e.g. 92"/>
+              <div class="err-msg">Please enter your hand width.</div>
+            </div>
+            <div class="orline"><span>or estimate from</span></div>
+            <div class="row2">
+              <div class="field">
+                <label for="ht">Height (cm) <em class="badge-hint">optional</em></label>
+                <input id="ht" type="number" min="0" placeholder="e.g. 170"/>
+              </div>
+              <div class="field">
+                <label for="wt">Weight (kg) <em class="badge-hint">optional</em></label>
+                <input id="wt" type="number" min="0" placeholder="e.g. 65"/>
+              </div>
+            </div>
+          </div>
+          <div class="input-hint">
             <div>
-              <h3>Hand Length</h3>
-              <p>From the tip of the middle finger straight down to the wrist crease.</p>
+              <h4>Measuring tips</h4>
+              <p>For the best result, measure the hand that will wear the glove, kept flat and relaxed.</p>
+            </div>
+            <div class="tip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#9FBCF0" stroke-width="1.6"/><path d="M12 8h.01M11 12h1v4h1" stroke="#9FBCF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              If you only have height and weight, we'll estimate your hand length — but direct measurement is more accurate.
             </div>
           </div>
-          <div class="m-card">
-            <div class="m-num">2</div>
-            <div class="m-fig"><img src="assets/hand-width.png" alt="Hand width" /></div>
-            <div>
-              <h3>Hand Width</h3>
-              <p>Across the widest part of the palm at the metacarpal knuckles.</p>
-            </div>
-          </div>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
+          <button class="btn btn-primary" id="calcBtn">Get My Size
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
-    </div>
 
-    <!-- SLIDE 3: INPUT -->
-    <div class="slide slide-input" id="slide2">
-      <div class="input-wrap">
-        <div class="form-side">
-          <h2 class="slide-title" style="color:var(--navy)">Step 2 — Your Measurements</h2>
-          <p class="slide-sub">Enter both measurements for the most accurate result.</p>
-          <div class="field" id="fLen">
-            <label for="len">Hand length (mm) <em class="hint">Required</em></label>
-            <input id="len" type="number" min="0" placeholder="e.g. 185" />
-            <div class="msg">Please enter your hand length.</div>
-          </div>
-          <div class="field" id="fWid">
-            <label for="wid">Hand width (mm) <em class="hint">Required</em></label>
-            <input id="wid" type="number" min="0" placeholder="e.g. 92" />
-            <div class="msg">Please enter your hand width.</div>
-          </div>
-          <div class="orline"><span>or estimate from</span></div>
-          <div class="row2">
-            <div class="field">
-              <label for="height">Height (cm) <em class="hint">optional</em></label>
-              <input id="height" type="number" min="0" placeholder="e.g. 170" />
-            </div>
-            <div class="field">
-              <label for="weight">Weight (kg) <em class="hint">optional</em></label>
-              <input id="weight" type="number" min="0" placeholder="e.g. 65" />
+      <!-- STEP 3 -->
+      <div class="step-panel" id="sp3">
+        <div class="result-layout">
+          <div class="result-card">
+            <div class="rc-label">Recommended size</div>
+            <div class="rc-size" id="resSize">—</div>
+            <div class="rc-cat" id="resCat"></div>
+            <div class="rc-divider"></div>
+            <div class="rc-row"><span>Hand length</span><b id="rLen">—</b></div>
+            <div class="rc-row"><span>Hand width</span><b id="rWid">—</b></div>
+            <div class="rc-row"><span>Fit confidence</span><b id="rConf">—</b></div>
+            <div class="rc-note">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="9" stroke="#9FBCF0" stroke-width="1.5"/><path d="M12 8h.01M11 12h1v4h1" stroke="#9FBCF0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span id="rNote"></span>
             </div>
           </div>
-        </div>
-        <div class="hint-side">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/></svg>
-          <p>Fill in your measurements on the left, then click <strong>Get My Size</strong> to see your result.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SLIDE 4: RESULT -->
-    <div class="slide slide-result" id="slide3">
-      <div class="result-wrap">
-        <div class="result-box">
-          <div class="res-label">Recommended size</div>
-          <div class="res-size" id="resSize">—</div>
-          <div class="res-cat" id="resCat"></div>
-          <div class="res-divider"></div>
-          <div class="res-row"><span>Hand length</span><b id="rLen">—</b></div>
-          <div class="res-row"><span>Hand width</span><b id="rWid">—</b></div>
-          <div class="res-row"><span>Fit confidence</span><b id="rConf">—</b></div>
-          <div class="res-note">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><circle cx="12" cy="12" r="9" stroke="#9FBCF0" stroke-width="1.6"/><path d="M12 8h.01M11 12h1v4h1" stroke="#9FBCF0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span id="rNote"></span>
+          <div class="ref-panel">
+            <p class="ref-title">Full size reference</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Size</th><th>Hand Length (mm)</th><th>Hand Width (mm)</th></tr></thead>
+                <tbody id="refBody">
+                  <tr data-s="XL"><td>XL</td><td>195 – 210</td><td>100 – 115</td></tr>
+                  <tr data-s="L"><td>L</td><td>180 – 198</td><td>90 – 105</td></tr>
+                  <tr data-s="M"><td>M</td><td>160 – 185</td><td>80 – 95</td></tr>
+                  <tr data-s="S"><td>S</td><td>145 – 165</td><td>70 – 80</td></tr>
+                  <tr data-s="12"><td>12</td><td>138 – 153</td><td>65 – 72</td></tr>
+                  <tr data-s="9"><td>9</td><td>126 – 145</td><td>60 – 67</td></tr>
+                  <tr data-s="7"><td>7</td><td>119 – 135</td><td>55 – 62</td></tr>
+                  <tr data-s="5"><td>5</td><td>108 – 126</td><td>50 – 57</td></tr>
+                  <tr data-s="3"><td>3</td><td>100 – 115</td><td>48 – 55</td></tr>
+                  <tr data-s="1.5"><td>1.5</td><td>85 – 95</td><td>40 – 48</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        <div class="ref-side">
-          <p class="ref-label">Full size reference</p>
-          <div class="tbl-wrap">
-            <table>
-              <thead><tr><th>Size</th><th>Hand Length (mm)</th><th>Hand Width (mm)</th></tr></thead>
-              <tbody id="refTbody">
-                <tr data-s="XL"><td>XL</td><td>195 – 210</td><td>100 – 115</td></tr>
-                <tr data-s="L"><td>L</td><td>180 – 198</td><td>90 – 105</td></tr>
-                <tr data-s="M"><td>M</td><td>160 – 185</td><td>80 – 95</td></tr>
-                <tr data-s="S"><td>S</td><td>145 – 165</td><td>70 – 80</td></tr>
-                <tr data-s="12"><td>12</td><td>138 – 153</td><td>65 – 72</td></tr>
-                <tr data-s="9"><td>9</td><td>126 – 145</td><td>60 – 67</td></tr>
-                <tr data-s="7"><td>7</td><td>119 – 135</td><td>55 – 62</td></tr>
-                <tr data-s="5"><td>5</td><td>108 – 126</td><td>50 – 57</td></tr>
-                <tr data-s="3"><td>3</td><td>100 – 115</td><td>48 – 55</td></tr>
-                <tr data-s="1.5"><td>1.5</td><td>85 – 95</td><td>40 – 48</td></tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="step-nav">
+          <button class="btn btn-ghost" onclick="goStep(2)">← Back</button>
+          <button class="btn btn-ghost" onclick="goStep(1)">Start Over</button>
         </div>
       </div>
-    </div>
 
-  </div><!-- /slides -->
-
-  <!-- BOTTOM NAV -->
-  <div class="botnav">
-    <div class="dots">
-      <div class="dot active" onclick="goSlide(0)"></div>
-      <div class="dot" onclick="goSlide(1)"></div>
-      <div class="dot" onclick="goSlide(2)"></div>
-      <div class="dot" onclick="goSlide(3)"></div>
-    </div>
-    <div class="nav-right">
-      <button class="btn btn-ghost" id="btnBack" onclick="goSlide(cur-1)" style="display:none">← Back</button>
-      <button class="btn btn-primary" id="btnNext" onclick="handleNext()">Next
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
   </div>
+</section>
 
-</div><!-- /deck -->
-
-<!-- FOOTER inside last slide's overflow — minimal, shown only on result slide -->
-<div id="footerBar" style="display:none;position:fixed;bottom:68px;left:0;right:0;text-align:center;font-size:12px;color:rgba(255,255,255,.35);padding:6px;pointer-events:none">
-  Providing innovative rehabilitation products &amp; services for hospitals, communities and homes. &nbsp;|&nbsp; © 2026 Syrebo
-</div>
+<footer>
+  <div class="foot">
+    <a href="/" class="logo"><img src="assets/logo.png" alt="Syrebo"/></a>
+    <p class="foot-tag">Providing innovative rehabilitation products &amp; services for hospitals, communities and homes.</p>
+    <p>© 2026 Syrebo</p>
+  </div>
+</footer>
 
 <script>
-  const SIZES=[
-    {s:"XL",cat:"Adult",  l:[195,210],w:[100,115]},
-    {s:"L", cat:"Adult",  l:[180,198],w:[90,105]},
-    {s:"M", cat:"Adult",  l:[160,185],w:[80,95]},
-    {s:"S", cat:"Adult",  l:[145,165],w:[70,80]},
-    {s:"12",cat:"Kid",    l:[138,153],w:[65,72]},
-    {s:"9", cat:"Kid",    l:[126,145],w:[60,67]},
-    {s:"7", cat:"Kid",    l:[119,135],w:[55,62]},
-    {s:"5", cat:"Kid",    l:[108,126],w:[50,57]},
-    {s:"3", cat:"Toddler",l:[100,115],w:[48,55]},
-    {s:"1.5",cat:"Toddler",l:[85,95], w:[40,48]}
-  ];
-  const HFACTOR=1.08;
-  function gap(v,[a,b]){return v<a?a-v:v>b?v-b:0}
-  function cd(v,[a,b]){return Math.abs(v-(a+b)/2)/((b-a)/2||1)}
+const SIZES=[
+  {s:"XL",cat:"Adult",  l:[195,210],w:[100,115]},
+  {s:"L", cat:"Adult",  l:[180,198],w:[90,105]},
+  {s:"M", cat:"Adult",  l:[160,185],w:[80,95]},
+  {s:"S", cat:"Adult",  l:[145,165],w:[70,80]},
+  {s:"12",cat:"Kid",    l:[138,153],w:[65,72]},
+  {s:"9", cat:"Kid",    l:[126,145],w:[60,67]},
+  {s:"7", cat:"Kid",    l:[119,135],w:[55,62]},
+  {s:"5", cat:"Kid",    l:[108,126],w:[50,57]},
+  {s:"3", cat:"Toddler",l:[100,115],w:[48,55]},
+  {s:"1.5",cat:"Toddler",l:[85,95], w:[40,48]}
+];
+const HFACTOR=1.08;
+function gap(v,[a,b]){return v<a?a-v:v>b?v-b:0}
+function cd(v,[a,b]){return Math.abs(v-(a+b)/2)/((b-a)/2||1)}
 
-  let cur=0;
-  const total=4;
+let cur=1;
+function goStep(n){
+  document.getElementById('sp'+cur).classList.remove('active');
+  cur=n;
+  document.getElementById('sp'+cur).classList.add('active');
+  [1,2,3].forEach(i=>{
+    const si=document.getElementById('si'+i);
+    si.classList.toggle('active',i===cur);
+    si.classList.toggle('done',i<cur);
+  });
+  [1,2].forEach(i=>document.getElementById('sl'+i).classList.toggle('done',i<cur));
+  document.getElementById('tool').scrollIntoView({behavior:'smooth',block:'start'});
+}
 
-  function goSlide(n){
-    if(n<0||n>=total) return;
-    const slides=document.querySelectorAll('.slide');
-    slides[cur].classList.add('exit-left');
-    setTimeout(()=>slides[cur].classList.remove('exit-left'),450);
-    slides[cur].classList.remove('active');
-    cur=n;
-    slides[cur].classList.add('active');
-    document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
-    document.getElementById('btnBack').style.display=cur>0?'':'none';
-    const btn=document.getElementById('btnNext');
-    if(cur===2){btn.textContent='Get My Size'; btn.innerHTML='Get My Size <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
-    else if(cur===3){btn.style.display='none';}
-    else{btn.style.display='';btn.innerHTML='Next <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
-    document.getElementById('footerBar').style.display=cur===3?'block':'none';
-  }
+document.getElementById('calcBtn').addEventListener('click',function(){
+  const len=parseFloat(document.getElementById('len').value);
+  const wid=parseFloat(document.getElementById('wid').value);
+  const ht =parseFloat(document.getElementById('ht').value);
+  const fLen=document.getElementById('fLen'), fWid=document.getElementById('fWid');
+  const hasLen=len>0, hasWid=wid>0, hasHt=ht>0;
+  let err=false;
+  if(!hasLen&&!hasHt){fLen.classList.add('err');err=true;}else fLen.classList.remove('err');
+  if(!hasWid){fWid.classList.add('err');err=true;}else fWid.classList.remove('err');
+  if(err){(!hasLen&&!hasHt?document.getElementById('len'):document.getElementById('wid')).focus();return;}
 
-  function handleNext(){
-    if(cur===2){ calcAndGo(); return; }
-    goSlide(cur+1);
-  }
-
-  function calcAndGo(){
-    const len=parseFloat(document.getElementById('len').value);
-    const wid=parseFloat(document.getElementById('wid').value);
-    const ht =parseFloat(document.getElementById('height').value);
-    const fLen=document.getElementById('fLen');
-    const fWid=document.getElementById('fWid');
-    const hasLen=len>0,hasWid=wid>0,hasHt=ht>0;
-    let err=false;
-    if(!hasLen&&!hasHt){fLen.classList.add('err');err=true;}else fLen.classList.remove('err');
-    if(!hasWid){fWid.classList.add('err');err=true;}else fWid.classList.remove('err');
-    if(err){(!hasLen&&!hasHt?document.getElementById('len'):document.getElementById('wid')).focus();return;}
-
-    const estimated=!hasLen;
-    const L=hasLen?len:Math.round(ht*HFACTOR);
-    let best=null,bestScore=Infinity,exact=false;
-    SIZES.forEach(o=>{
-      const g=gap(L,o.l)+gap(wid,o.w);
-      const score=g*1000+cd(L,o.l)+cd(wid,o.w);
-      if(score<bestScore){bestScore=score;best=o;exact=(g===0);}
-    });
-
-    document.getElementById('resSize').textContent=best.s;
-    document.getElementById('resCat').textContent=best.cat+(estimated?' · height estimate':' · measured');
-    document.getElementById('rLen').textContent=L+' mm'+(estimated?' (est.)':'');
-    document.getElementById('rWid').textContent=wid+' mm';
-    document.getElementById('rConf').textContent=estimated?'Estimate':(exact?'Excellent':'Closest match');
-    document.getElementById('rNote').textContent=estimated
-      ?'Estimated from height — for best accuracy, measure hand length directly.'
-      :(exact?'Your measurements fall comfortably within the '+best.cat+' '+best.s+' range.'
-             :'Matched to the closest available size.');
-
-    document.querySelectorAll('#refTbody tr').forEach(tr=>{
-      tr.classList.toggle('highlight',tr.dataset.s===best.s);
-    });
-
-    goSlide(3);
-  }
-
-  ['len','wid','height','weight'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.addEventListener('keydown',e=>{if(e.key==='Enter')handleNext();});
-    el.addEventListener('input',()=>{
-      document.getElementById('fLen').classList.remove('err');
-      document.getElementById('fWid').classList.remove('err');
-    });
+  const estimated=!hasLen, L=hasLen?len:Math.round(ht*HFACTOR);
+  let best=null,bestScore=Infinity,exact=false;
+  SIZES.forEach(o=>{
+    const g=gap(L,o.l)+gap(wid,o.w);
+    const score=g*1000+cd(L,o.l)+cd(wid,o.w);
+    if(score<bestScore){bestScore=score;best=o;exact=(g===0);}
   });
 
-  // keyboard arrow nav
-  document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'||e.key==='ArrowDown') handleNext();
-    if(e.key==='ArrowLeft'||e.key==='ArrowUp') goSlide(cur-1);
-  });
+  document.getElementById('resSize').textContent=best.s;
+  document.getElementById('resCat').textContent=best.cat+(estimated?' · height estimate':' · measured');
+  document.getElementById('rLen').textContent=L+' mm'+(estimated?' (est.)':'');
+  document.getElementById('rWid').textContent=wid+' mm';
+  document.getElementById('rConf').textContent=estimated?'Estimate':(exact?'Excellent':'Closest match');
+  document.getElementById('rNote').textContent=estimated
+    ?'Estimated from height. Measure your hand length directly for the best fit.'
+    :(exact?'Your measurements fall comfortably within the '+best.cat+' '+best.s+' range.'
+           :'Matched to the closest available size.');
+  document.querySelectorAll('#refBody tr').forEach(r=>r.classList.toggle('hl',r.dataset.s===best.s));
+  goStep(3);
+});
+
+['len','wid','ht','wt'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('calcBtn').click();});
+  el.addEventListener('input',()=>{document.getElementById('fLen').classList.remove('err');document.getElementById('fWid').classList.remove('err');});
+});
+
+window.addEventListener('scroll',()=>document.querySelector('header').classList.toggle('scrolled',scrollY>10),{passive:true});
 </script>
 </body>
 </html>
