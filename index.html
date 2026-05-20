@@ -63,8 +63,9 @@
     border-bottom:1px solid var(--line);
   }
   .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
-  .logo{font-family:"Sora",sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;color:var(--navy)}
-  .logo span{color:var(--blue)}
+  .logo{display:inline-block;line-height:0}
+  .logo img{height:38px;width:auto;display:block}
+  .foot .logo img{height:32px}
   .tagline{
     font-family:"Manrope",sans-serif;color:var(--muted);font-size:14px;font-weight:500;
     max-width:540px;text-align:right;line-height:1.45;
@@ -262,7 +263,7 @@
 
 <header>
   <nav class="nav">
-    <div class="logo">SY<span>REBO</span></div>
+    <a href="/" class="logo" aria-label="Syrebo home"><img src="assets/logo.png" alt="Syrebo" /></a>
     <div class="tagline">Providing innovative rehabilitation products &amp; services for hospitals, communities and homes.</div>
   </nav>
 </header>
@@ -474,7 +475,7 @@
 
 <footer>
   <div class="foot">
-    <div class="logo">SY<span>REBO</span></div>
+    <a href="/" class="logo" aria-label="Syrebo home"><img src="assets/logo.png" alt="Syrebo" /></a>
     <p>© 2026 Syrebo</p>
   </div>
 </footer>
