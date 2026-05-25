@@ -432,51 +432,52 @@ window.addEventListener('scroll',()=>document.querySelector('header').classList.
   if(!panel) return;
   const inner = panel.querySelector('.hgp-inner');
   const row   = inner.querySelector('.ss-row');
-  let paused = false, pauseTimer = null, arrowRaf = null, arrowDir = 0;
+  let hovering = false, arrowActive = false, arrowDir = 0;
+  let acc = 0; // sub-pixel accumulator for auto-scroll
 
   function half(){ return row.scrollWidth / 2; }
   function wrap(){
-    if(inner.scrollLeft >= half()) inner.scrollLeft -= half();
-    if(inner.scrollLeft < 0)      inner.scrollLeft += half();
+    const h = half();
+    if(h <= 0) return;
+    if(inner.scrollLeft >= h) inner.scrollLeft -= h;
+    if(inner.scrollLeft < 0)  inner.scrollLeft += h;
   }
 
-  /* rAF auto-scroll — slow */
+  /* auto-scroll: accumulate sub-pixels so 0.4px/frame actually moves */
   (function tick(){
-    if(!paused){
-      inner.scrollLeft += 0.25;
-      wrap();
+    if(!hovering && !arrowActive){
+      acc += 0.4;
+      const step = Math.floor(acc);
+      if(step >= 1){ inner.scrollLeft += step; acc -= step; wrap(); }
     }
     requestAnimationFrame(tick);
   })();
 
-  /* hold-arrow continuous scroll */
+  /* hold-arrow: 4px per frame */
   function arrowTick(){
-    inner.scrollLeft += arrowDir * 1.4;
+    inner.scrollLeft += arrowDir * 4;
     wrap();
-    arrowRaf = requestAnimationFrame(arrowTick);
+    if(arrowActive) requestAnimationFrame(arrowTick);
   }
   function startArrow(dir){
-    paused = true;
-    clearTimeout(pauseTimer);
-    arrowDir = dir;
-    if(!arrowRaf) arrowRaf = requestAnimationFrame(arrowTick);
+    hovering = false; arrowActive = true; arrowDir = dir;
+    requestAnimationFrame(arrowTick);
   }
   function stopArrow(){
-    cancelAnimationFrame(arrowRaf); arrowRaf = null; arrowDir = 0;
-    pauseTimer = setTimeout(()=>{ paused=false; pauseTimer=null; }, 600);
+    arrowActive = false; arrowDir = 0;
   }
 
   ['.hgp-arrow.left','.hgp-arrow.right'].forEach((sel,i)=>{
     const btn = panel.querySelector(sel);
     const dir = i===0 ? -1 : 1;
     btn.addEventListener('pointerdown', e=>{ e.preventDefault(); btn.setPointerCapture(e.pointerId); startArrow(dir); });
-    btn.addEventListener('pointerup',   stopArrow);
-    btn.addEventListener('pointercancel', stopArrow);
+    btn.addEventListener('pointerup',    stopArrow);
+    btn.addEventListener('pointercancel',stopArrow);
   });
 
-  /* hover pause */
-  inner.addEventListener('mouseenter', ()=>{ paused=true; });
-  inner.addEventListener('mouseleave', ()=>{ if(!pauseTimer) paused=false; });
+  /* hover pauses auto-scroll */
+  inner.addEventListener('mouseenter', ()=>{ hovering=true; });
+  inner.addEventListener('mouseleave', ()=>{ hovering=false; });
 })();
 
 </script>
