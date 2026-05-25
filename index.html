@@ -426,42 +426,52 @@ document.getElementById('resetBtn').addEventListener('click',function(){
 
 window.addEventListener('scroll',()=>document.querySelector('header').classList.toggle('scrolled',scrollY>10),{passive:true});
 
-/* ── Glove panel: auto-scroll + arrow buttons ── */
+/* ── Glove panel: auto-scroll + hold-arrow buttons ── */
 (function(){
   const panel = document.querySelector('.hero-glove-panel');
   if(!panel) return;
   const inner = panel.querySelector('.hgp-inner');
   const row   = inner.querySelector('.ss-row');
-  let paused = false, pauseTimer = null;
+  let paused = false, pauseTimer = null, arrowRaf = null, arrowDir = 0;
 
   function half(){ return row.scrollWidth / 2; }
+  function wrap(){
+    if(inner.scrollLeft >= half()) inner.scrollLeft -= half();
+    if(inner.scrollLeft < 0)      inner.scrollLeft += half();
+  }
 
-  /* rAF auto-scroll */
+  /* rAF auto-scroll — slow */
   (function tick(){
     if(!paused){
-      inner.scrollLeft += 0.55;
-      if(inner.scrollLeft >= half()) inner.scrollLeft -= half();
+      inner.scrollLeft += 0.25;
+      wrap();
     }
     requestAnimationFrame(tick);
   })();
 
-  function pauseFor(ms){
+  /* hold-arrow continuous scroll */
+  function arrowTick(){
+    inner.scrollLeft += arrowDir * 1.4;
+    wrap();
+    arrowRaf = requestAnimationFrame(arrowTick);
+  }
+  function startArrow(dir){
     paused = true;
     clearTimeout(pauseTimer);
-    pauseTimer = setTimeout(()=>{ paused=false; pauseTimer=null; }, ms);
+    arrowDir = dir;
+    if(!arrowRaf) arrowRaf = requestAnimationFrame(arrowTick);
+  }
+  function stopArrow(){
+    cancelAnimationFrame(arrowRaf); arrowRaf = null; arrowDir = 0;
+    pauseTimer = setTimeout(()=>{ paused=false; pauseTimer=null; }, 600);
   }
 
-  panel.querySelector('.hgp-arrow.left').addEventListener('click', ()=>{
-    pauseFor(3000);
-    let t = inner.scrollLeft - 200;
-    if(t < 0) t += half();
-    inner.scrollTo({ left: t, behavior:'smooth' });
-  });
-  panel.querySelector('.hgp-arrow.right').addEventListener('click', ()=>{
-    pauseFor(3000);
-    let t = inner.scrollLeft + 200;
-    if(t >= half()) t -= half();
-    inner.scrollTo({ left: t, behavior:'smooth' });
+  ['.hgp-arrow.left','.hgp-arrow.right'].forEach((sel,i)=>{
+    const btn = panel.querySelector(sel);
+    const dir = i===0 ? -1 : 1;
+    btn.addEventListener('pointerdown', e=>{ e.preventDefault(); btn.setPointerCapture(e.pointerId); startArrow(dir); });
+    btn.addEventListener('pointerup',   stopArrow);
+    btn.addEventListener('pointercancel', stopArrow);
   });
 
   /* hover pause */
