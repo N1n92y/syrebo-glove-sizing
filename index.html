@@ -51,63 +51,50 @@ header.scrolled{box-shadow:0 6px 28px -14px rgba(10,37,64,.18)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(20,82,230,.6)}
 .btn-primary:active{transform:none}
 
-/* hero right col: trust signal */
-.hero-trust{display:flex;flex-direction:column;align-items:center;gap:18px}
-.hero-trust img{width:min(340px,90%);filter:drop-shadow(0 8px 24px rgba(20,82,230,.12))}
-@media(max-width:780px){.hero-trust{display:none}}
-
-/* ── SIZE STRIP (auto-marquee) ── */
-.size-strip{
-  margin-top:clamp(40px,5vw,64px);
-  padding:0 clamp(16px,3vw,40px);
-  position:relative;z-index:1;
-}
-.ss-frame{
+/* ── HERO RIGHT COL: glove marquee panel ── */
+.hero-glove-panel{
   position:relative;
-  max-width:var(--maxw);
-  margin:0 auto;
   border-radius:22px;
   border:1.5px solid var(--line);
-  background:linear-gradient(160deg,#f0f5ff 0%,#f8faff 100%);
-  box-shadow:0 6px 32px -10px rgba(10,37,64,.1);
+  background:linear-gradient(160deg,#eef4ff 0%,#f8faff 100%);
+  box-shadow:0 8px 36px -12px rgba(10,37,64,.13);
   overflow:hidden;
+  height:210px;
+  align-self:center;
 }
-/* edge fade vignette */
-.ss-frame::before,.ss-frame::after{
-  content:"";position:absolute;top:0;bottom:0;width:80px;z-index:3;pointer-events:none;
+.hero-glove-panel::before,.hero-glove-panel::after{
+  content:"";position:absolute;top:0;bottom:0;width:56px;z-index:3;pointer-events:none;
 }
-.ss-frame::before{left:0;background:linear-gradient(90deg,#f0f5ff 20%,transparent)}
-.ss-frame::after {right:0;background:linear-gradient(-90deg,#f8faff 20%,transparent)}
-/* marquee track */
+.hero-glove-panel::before{left:0;background:linear-gradient(90deg,#eef4ff 20%,transparent)}
+.hero-glove-panel::after {right:0;background:linear-gradient(-90deg,#f8faff 20%,transparent)}
+@media(max-width:780px){.hero-glove-panel{display:none}}
+
+/* marquee track (shared for both hero panel & any future strip) */
 .ss-row{
   display:flex;align-items:flex-end;
-  gap:28px;
-  padding:36px 28px 28px;
+  gap:20px;
+  padding:28px 20px 22px;
   width:max-content;
-  animation:ss-marquee 28s linear infinite;
+  animation:ss-marquee 22s linear infinite;
   will-change:transform;
 }
-.ss-frame:hover .ss-row{animation-play-state:paused}
+.hero-glove-panel:hover .ss-row{animation-play-state:paused}
 @keyframes ss-marquee{
   0%  {transform:translateX(0)}
   100%{transform:translateX(-50%)}
 }
 .ss-item{
   flex-shrink:0;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
 }
 .ss-item img{
   height:var(--h);
   width:auto;max-width:none;
   display:block;pointer-events:none;
-  filter:drop-shadow(0 8px 18px rgba(10,37,64,.15));
+  filter:drop-shadow(0 6px 14px rgba(10,37,64,.15));
 }
-.ss-item.orange img{filter:drop-shadow(0 8px 15px rgba(150,68,0,.22))}
-.ss-lbl b{font-family:"Sora",sans-serif;font-weight:800;font-size:13px;color:var(--navy)}
-@media(max-width:640px){
-  .ss-item img{height:calc(var(--h) * .75)}
-  .ss-row{gap:20px;padding:28px 20px 22px}
-}
+.ss-item.orange img{filter:drop-shadow(0 6px 12px rgba(150,68,0,.22))}
+.ss-lbl b{font-family:"Sora",sans-serif;font-weight:800;font-size:12px;color:var(--navy)}
 
 /* ── TOOL SECTION ── */
 .tool-section{padding:clamp(64px,8vw,100px) 28px clamp(80px,10vw,120px);background:#fff}
@@ -206,40 +193,33 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
-    <div class="hero-trust">
-      <img src="assets/trust-badges.png" alt="80+ countries · 4000+ medical units · 60000+ families"/>
+    <div class="hero-glove-panel">
+      <div class="ss-row">
+        <!-- set 1 -->
+        <div class="ss-item orange" style="--h:60px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>1.5</b></div></div>
+        <div class="ss-item orange" style="--h:69px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>3</b></div></div>
+        <div class="ss-item orange" style="--h:77px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>5</b></div></div>
+        <div class="ss-item orange" style="--h:83px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>7</b></div></div>
+        <div class="ss-item orange" style="--h:89px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>9</b></div></div>
+        <div class="ss-item orange" style="--h:95px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>12</b></div></div>
+        <div class="ss-item orange" style="--h:103px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>S</b></div></div>
+        <div class="ss-item" style="--h:113px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>M</b></div></div>
+        <div class="ss-item" style="--h:124px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>L</b></div></div>
+        <div class="ss-item" style="--h:133px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>XL</b></div></div>
+        <!-- set 2 duplicate for seamless loop -->
+        <div class="ss-item orange" style="--h:60px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>1.5</b></div></div>
+        <div class="ss-item orange" style="--h:69px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>3</b></div></div>
+        <div class="ss-item orange" style="--h:77px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>5</b></div></div>
+        <div class="ss-item orange" style="--h:83px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>7</b></div></div>
+        <div class="ss-item orange" style="--h:89px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>9</b></div></div>
+        <div class="ss-item orange" style="--h:95px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>12</b></div></div>
+        <div class="ss-item orange" style="--h:103px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>S</b></div></div>
+        <div class="ss-item" style="--h:113px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>M</b></div></div>
+        <div class="ss-item" style="--h:124px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>L</b></div></div>
+        <div class="ss-item" style="--h:133px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>XL</b></div></div>
+      </div>
     </div>
   </div>
-
-  <!-- size strip: auto-marquee, hover to pause -->
-  <div class="size-strip">
-    <div class="ss-frame">
-    <div class="ss-row">
-      <!-- set 1 -->
-      <div class="ss-item orange" style="--h:91px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>1.5</b></div></div>
-      <div class="ss-item orange" style="--h:106px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>3</b></div></div>
-      <div class="ss-item orange" style="--h:118px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>5</b></div></div>
-      <div class="ss-item orange" style="--h:128px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>7</b></div></div>
-      <div class="ss-item orange" style="--h:137px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>9</b></div></div>
-      <div class="ss-item orange" style="--h:146px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>12</b></div></div>
-      <div class="ss-item orange" style="--h:158px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>S</b></div></div>
-      <div class="ss-item" style="--h:174px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>M</b></div></div>
-      <div class="ss-item" style="--h:190px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>L</b></div></div>
-      <div class="ss-item" style="--h:205px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>XL</b></div></div>
-      <!-- set 2 (duplicate for seamless loop) -->
-      <div class="ss-item orange" style="--h:91px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>1.5</b></div></div>
-      <div class="ss-item orange" style="--h:106px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>3</b></div></div>
-      <div class="ss-item orange" style="--h:118px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>5</b></div></div>
-      <div class="ss-item orange" style="--h:128px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>7</b></div></div>
-      <div class="ss-item orange" style="--h:137px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>9</b></div></div>
-      <div class="ss-item orange" style="--h:146px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>12</b></div></div>
-      <div class="ss-item orange" style="--h:158px"><img src="assets/hero-glove-orange.png" alt=""/><div class="ss-lbl"><b>S</b></div></div>
-      <div class="ss-item" style="--h:174px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>M</b></div></div>
-      <div class="ss-item" style="--h:190px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>L</b></div></div>
-      <div class="ss-item" style="--h:205px"><img src="assets/hero-glove.png" alt=""/><div class="ss-lbl"><b>XL</b></div></div>
-    </div><!-- ss-row -->
-    </div><!-- ss-frame -->
-  </div><!-- size-strip -->
 
 </section>
 
