@@ -61,30 +61,40 @@ header.scrolled{box-shadow:0 8px 32px -16px rgba(10,37,64,.18)}
 .hero-glow{position:absolute;width:92%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(20,82,230,.15),transparent 65%)}
 .hero-ring{position:absolute;width:76%;aspect-ratio:1;border:1.5px dashed rgba(20,82,230,.2);border-radius:50%;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.hero-glove{width:min(390px,80%);position:relative;z-index:3;filter:drop-shadow(0 24px 40px rgba(11,59,176,.22));animation:float 7s ease-in-out infinite}
+.hero-glove{display:none}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .size-spectrum{
   position:absolute;inset:24px 0 18px;z-index:2;
   display:flex;align-items:center;justify-content:center;pointer-events:none;
 }
-.spectrum-hands{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.hand-shadow{
-  position:absolute;bottom:112px;left:50%;width:148px;
-  transform:translateX(calc(-50% + var(--x))) scale(var(--scale));
-  transform-origin:50% 100%;opacity:var(--alpha);mix-blend-mode:multiply;
-  filter:blur(.15px) drop-shadow(0 18px 30px rgba(10,37,64,.08)) saturate(.92);
-  animation:spectrum-breathe 6.5s ease-in-out infinite;
+.spectrum-gloves{
+  position:absolute;left:1%;right:1%;bottom:92px;height:330px;
+  display:grid;grid-template-columns:repeat(5,1fr);align-items:end;
+}
+.spectrum-glove{
+  position:relative;display:flex;justify-content:center;align-items:flex-end;
+  height:100%;animation:spectrum-breathe 6.5s ease-in-out infinite;
   animation-delay:var(--delay);
 }
-.hand-shadow img{width:100%;height:auto;opacity:.78}
-.hand-shadow.blue img{filter:hue-rotate(180deg) saturate(.8) brightness(1.12)}
-.hand-shadow.orange img{filter:hue-rotate(332deg) saturate(.88) brightness(1.08)}
+.spectrum-glove::after{
+  content:"";position:absolute;bottom:5px;left:50%;width:64%;height:18px;
+  transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(ellipse,rgba(10,37,64,.18),rgba(10,37,64,0) 70%);
+  filter:blur(2px);
+}
+.spectrum-glove img{
+  position:relative;z-index:1;width:var(--w);height:auto;
+  transform:rotate(var(--rot));
+  filter:drop-shadow(0 22px 30px rgba(10,37,64,.2));
+}
+.spectrum-glove.orange img{filter:drop-shadow(0 20px 28px rgba(178,82,0,.22))}
+.spectrum-glove.blue img{filter:drop-shadow(0 24px 34px rgba(11,59,176,.24))}
 @keyframes spectrum-breathe{
-  0%,100%{opacity:var(--alpha);transform:translateX(calc(-50% + var(--x))) scale(var(--scale))}
-  50%{opacity:calc(var(--alpha) + .1);transform:translateX(calc(-50% + var(--x))) scale(calc(var(--scale) * 1.025))}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
 .spectrum-scale{
-  position:absolute;left:7%;right:7%;bottom:52px;height:72px;
+  position:absolute;left:4%;right:4%;bottom:52px;height:72px;
   display:grid;grid-template-columns:repeat(5,1fr);align-items:end;
 }
 .spectrum-scale::before{
@@ -113,9 +123,10 @@ header.scrolled{box-shadow:0 8px 32px -16px rgba(10,37,64,.18)}
   .hero-desc{margin-left:auto;margin-right:auto}
   .hero-copy-note{justify-content:center}
   .hero-copy-note::before{display:none}
-  .hero-visual{order:-1;min-height:330px}.hero-glove{width:min(245px,58%)}
+  .hero-visual{order:-1;min-height:330px}
   .size-spectrum{inset:0 -10px 8px}
-  .hand-shadow{bottom:77px;width:104px}
+  .spectrum-gloves{left:-4%;right:-4%;bottom:72px;height:210px}
+  .spectrum-glove img{width:calc(var(--w) * .72)}
   .spectrum-scale{left:1%;right:1%;bottom:28px;height:54px}
   .spectrum-scale::before{bottom:29px}
   .scale-item::before{bottom:24px;height:10px}
@@ -245,21 +256,21 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid rgba(
       <div class="hero-glow"></div>
       <div class="hero-ring"></div>
       <div class="size-spectrum" aria-hidden="true">
-        <div class="spectrum-hands">
-          <div class="hand-shadow blue" style="--x:-178px;--scale:.64;--alpha:.26;--delay:-.2s">
-            <img src="assets/hand-palm-shadow.png" alt=""/>
+        <div class="spectrum-gloves">
+          <div class="spectrum-glove orange" style="--w:88px;--rot:-8deg;--delay:-.2s">
+            <img src="assets/kid-glove.png" alt=""/>
           </div>
-          <div class="hand-shadow orange" style="--x:-88px;--scale:.78;--alpha:.24;--delay:-1s">
-            <img src="assets/hand-palm-shadow.png" alt=""/>
+          <div class="spectrum-glove orange" style="--w:112px;--rot:-4deg;--delay:-1s">
+            <img src="assets/kid-glove.png" alt=""/>
           </div>
-          <div class="hand-shadow blue" style="--x:2px;--scale:.92;--alpha:.2;--delay:-1.8s">
-            <img src="assets/hand-palm-shadow.png" alt=""/>
+          <div class="spectrum-glove blue" style="--w:148px;--rot:0deg;--delay:-1.8s">
+            <img src="assets/hero-glove.png" alt=""/>
           </div>
-          <div class="hand-shadow orange" style="--x:96px;--scale:1.06;--alpha:.2;--delay:-2.6s">
-            <img src="assets/hand-palm-shadow.png" alt=""/>
+          <div class="spectrum-glove blue" style="--w:178px;--rot:4deg;--delay:-2.6s">
+            <img src="assets/hero-glove.png" alt=""/>
           </div>
-          <div class="hand-shadow blue" style="--x:194px;--scale:1.22;--alpha:.17;--delay:-3.4s">
-            <img src="assets/hand-palm-shadow.png" alt=""/>
+          <div class="spectrum-glove blue" style="--w:208px;--rot:8deg;--delay:-3.4s">
+            <img src="assets/hero-glove.png" alt=""/>
           </div>
         </div>
         <div class="spectrum-scale">
